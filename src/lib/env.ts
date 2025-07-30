@@ -7,8 +7,14 @@ const interpretEnvVarAsBool = (val: unknown): boolean => {
 
 const envSchema = z
   .object({
-    POSTGRES_URL_NON_POOLING: z.string().url(),
-    POSTGRES_PRISMA_URL: z.string().url(),
+    // Postgres URLs (keeping for now during transition)
+    POSTGRES_URL_NON_POOLING: z.string().url().optional(),
+    POSTGRES_PRISMA_URL: z.string().url().optional(),
+    // Supabase configuration
+    SUPABASE_URL: z.string().url(),
+    SUPABASE_API_ANON_KEY: z.string(),
+    SUPABASE_SERVICE_ROLE: z.string(),
+    SUPABASE_POSTGRES_URL: z.string().url(),
     NEXT_PUBLIC_BASE_URL: z
       .string()
       .optional()

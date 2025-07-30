@@ -3,15 +3,13 @@ import { ActiveUserBalance } from '@/app/groups/[groupId]/expenses/active-user-b
 import { CategoryIcon } from '@/app/groups/[groupId]/expenses/category-icon'
 import { DocumentsCount } from '@/app/groups/[groupId]/expenses/documents-count'
 import { Button } from '@/components/ui/button'
-import { getGroupExpenses } from '@/lib/api'
+import { type Expense } from '@/lib/api'
 import { cn, formatCurrency, formatDate } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Fragment } from 'react'
-
-type Expense = Awaited<ReturnType<typeof getGroupExpenses>>[number]
 
 function Participants({ expense }: { expense: Expense }) {
   const t = useTranslations('ExpenseCard')
@@ -58,13 +56,22 @@ export function ExpenseCard({ expense, currency, groupId }: Props) {
       />
       <div className="flex-1">
         <div className={cn('mb-1', expense.isReimbursement && 'italic')}>
-          {expense.title}
-        </div>
-        <div className="text-xs text-muted-foreground">
-          <Participants expense={expense} />
-        </div>
-        <div className="text-xs text-muted-foreground">
-          <ActiveUserBalance {...{ groupId, currency, expense }} />
+          <div className="flex items-center justify-between">
+            <div className="font-medium">{expense.title}</div>
+            <div className="flex items-center gap-1">
+              <DocumentsCount count={expense._count?.documents ?? 0} />
+              <ActiveUserBalance
+                expense={expense}
+                currency={currency}
+                className="text-right"
+              />
+            </div>
+          </div>
+          <div className="text-muted-foreground text-xs">
+            {formatDate(new Date(expense.expenseDate), locale)}
+            {' • '}
+            <Participants expense={expense} />
+          </div>
         </div>
       </div>
       <div className="flex flex-col justify-between items-end">
@@ -77,10 +84,14 @@ export function ExpenseCard({ expense, currency, groupId }: Props) {
           {formatCurrency(currency, expense.amount, locale)}
         </div>
         <div className="text-xs text-muted-foreground">
-          <DocumentsCount count={expense._count.documents} />
+          <DocumentsCount count={expense._count?.documents ?? 0} />
         </div>
         <div className="text-xs text-muted-foreground">
-          {formatDate(expense.expenseDate, locale, { dateStyle: 'medium' })}
+          <ActiveUserBalance
+            groupId={groupId}
+            currency={currency}
+            expense={expense}
+          />
         </div>
       </div>
       <Button
