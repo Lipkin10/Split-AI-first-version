@@ -29,10 +29,9 @@ FROM node:21-alpine AS runtime-deps
 
 WORKDIR /usr/app
 COPY --from=base /usr/app/package.json /usr/app/package-lock.json /usr/app/next.config.mjs ./
-COPY --from=base /usr/app/prisma ./prisma
+# Prisma directory removed - using Supabase
 
-RUN npm ci --omit=dev --omit=optional --ignore-scripts && \
-    npx prisma generate
+RUN npm ci --omit=dev --omit=optional --ignore-scripts
 
 FROM node:21-alpine AS runner
 
@@ -43,7 +42,7 @@ COPY --from=base /usr/app/package.json /usr/app/package-lock.json /usr/app/next.
 COPY --from=runtime-deps /usr/app/node_modules ./node_modules
 COPY ./public ./public
 COPY ./scripts ./scripts
-COPY --from=base /usr/app/prisma ./prisma
+# Prisma directory removed - using Supabase
 COPY --from=base /usr/app/.next ./.next
 
 ENTRYPOINT ["/bin/sh", "/usr/app/scripts/container-entrypoint.sh"]

@@ -18,11 +18,7 @@ export const listGroupExpensesProcedure = baseProcedure
       filter,
     })
     return {
-      expenses: expenses.slice(0, limit).map((expense) => ({
-        ...expense,
-        createdAt: new Date(expense.createdAt),
-        expenseDate: new Date(expense.expenseDate),
-      })),
+      expenses: expenses.slice(0, limit),
       hasMore: !!expenses[limit],
       nextCursor: cursor + limit,
     }

@@ -15,8 +15,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { Category } from '@/lib/api'
 import { useMediaQuery } from '@/lib/hooks'
-import { Category } from '@prisma/client'
 import { useTranslations } from 'next-intl'
 import { forwardRef, useEffect, useState } from 'react'
 

@@ -1,40 +1,32 @@
-version: 4.33.1
-installed_at: '2025-07-29T20:50:39.903Z'
+version: 4.34.0
+installed_at: '2025-08-03T17:21:57.047Z'
 install_type: full
 agent: null
 ides_setup:
   - cursor
+  - claude-code
 expansion_packs: []
 files:
   - path: .bmad-core/working-in-the-brownfield.md
     hash: 03b4f11efa5abeb5
     modified: false
   - path: .bmad-core/user-guide.md
-    hash: a816f42bb2a1a405
+    hash: 76403bbc48b4c389
+    modified: false
+  - path: .bmad-core/install-manifest.yaml
+    hash: 54bc28c4d45f0b71
     modified: false
   - path: .bmad-core/enhanced-ide-development-workflow.md
     hash: 3c3a2383d7772089
     modified: false
   - path: .bmad-core/core-config.yaml
-    hash: 787804844ead30b1
+    hash: a7d1007020c0702f
     modified: false
-  - path: .bmad-core/workflows/greenfield-ui.yaml
-    hash: 1317dedfc4609a87
+  - path: .bmad-core/utils/workflow-management.md
+    hash: b148df3ebb1f9c61
     modified: false
-  - path: .bmad-core/workflows/greenfield-service.yaml
-    hash: 64a32ede2aa02ec6
-    modified: false
-  - path: .bmad-core/workflows/greenfield-fullstack.yaml
-    hash: f6f399871f78450f
-    modified: false
-  - path: .bmad-core/workflows/brownfield-ui.yaml
-    hash: 675a533e0c6b4285
-    modified: false
-  - path: .bmad-core/workflows/brownfield-service.yaml
-    hash: cb65b32c82edf897
-    modified: false
-  - path: .bmad-core/workflows/brownfield-fullstack.yaml
-    hash: 43aee996cfa1f75a
+  - path: .bmad-core/utils/bmad-doc-template.md
+    hash: 4b2f7c4408835b9e
     modified: false
   - path: .bmad-core/templates/story-tmpl.yaml
     hash: dee630bee4fcaad3
@@ -135,9 +127,6 @@ files:
   - path: .bmad-core/data/bmad-kb.md
     hash: 8900cde5b6a560e9
     modified: false
-  - path: .bmad-core/bmad-core/user-guide.md
-    hash: e3b0c44298fc1c14
-    modified: false
   - path: .bmad-core/checklists/story-draft-checklist.md
     hash: 59d7aeacedd9d447
     modified: false
@@ -156,17 +145,8 @@ files:
   - path: .bmad-core/checklists/architect-checklist.md
     hash: 24cc8a63ea467636
     modified: false
-  - path: .bmad-core/agent-teams/team-no-ui.yaml
-    hash: 56e7e3a9e1a243f6
-    modified: false
-  - path: .bmad-core/agent-teams/team-ide-minimal.yaml
-    hash: 600b6795116fd74e
-    modified: false
-  - path: .bmad-core/agent-teams/team-fullstack.yaml
-    hash: 8a6b8f248bd5b9fc
-    modified: false
-  - path: .bmad-core/agent-teams/team-all.yaml
-    hash: abbb0c0eaf28b894
+  - path: .bmad-core/bmad-core/user-guide.md
+    hash: e3b0c44298fc1c14
     modified: false
   - path: .bmad-core/agents/ux-expert.md
     hash: dc538703809ff200
@@ -198,9 +178,36 @@ files:
   - path: .bmad-core/agents/analyst.md
     hash: e8d7488ff12e44f1
     modified: false
-  - path: .bmad-core/utils/workflow-management.md
-    hash: b148df3ebb1f9c61
+  - path: .bmad-core/workflows/greenfield-ui.yaml
+    hash: 1317dedfc4609a87
     modified: false
-  - path: .bmad-core/utils/bmad-doc-template.md
-    hash: 4b2f7c4408835b9e
+  - path: .bmad-core/workflows/greenfield-service.yaml
+    hash: 64a32ede2aa02ec6
+    modified: false
+  - path: .bmad-core/workflows/greenfield-fullstack.yaml
+    hash: f6f399871f78450f
+    modified: false
+  - path: .bmad-core/workflows/brownfield-ui.yaml
+    hash: 675a533e0c6b4285
+    modified: false
+  - path: .bmad-core/workflows/brownfield-service.yaml
+    hash: cb65b32c82edf897
+    modified: false
+  - path: .bmad-core/workflows/brownfield-fullstack.yaml
+    hash: 43aee996cfa1f75a
+    modified: false
+  - path: .bmad-core/agent-teams/team-no-ui.yaml
+    hash: 56e7e3a9e1a243f6
+    modified: false
+  - path: .bmad-core/agent-teams/team-ide-minimal.yaml
+    hash: 600b6795116fd74e
+    modified: false
+  - path: .bmad-core/agent-teams/team-fullstack.yaml
+    hash: 8a6b8f248bd5b9fc
+    modified: false
+  - path: .bmad-core/agent-teams/team-all.yaml
+    hash: abbb0c0eaf28b894
+    modified: false
+  - path: .bmad-core/data/external-apis/openai-conversation.md
+    hash: 3e055b76c7acafc1
     modified: false

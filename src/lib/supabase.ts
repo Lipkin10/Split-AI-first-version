@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { env } from './env'
 
-// Database types generated from Supabase (will be generated after schema creation)
+// Database types aligned with current codebase structure
 export interface Database {
   public: {
     Tables: {
@@ -72,10 +72,10 @@ export interface Database {
           amount: number
           paidById: string
           isReimbursement: boolean
-          splitMode: 'EVENLY' | 'BY_SHARES' | 'BY_PERCENTAGE' | 'BY_AMOUNT'
+          splitMode: string
           createdAt: string
           notes: string | null
-          recurrenceRule: 'NONE' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | null
+          recurrenceRule: string | null
           recurringExpenseLinkId: string | null
         }
         Insert: {
@@ -87,10 +87,10 @@ export interface Database {
           amount: number
           paidById: string
           isReimbursement?: boolean
-          splitMode?: 'EVENLY' | 'BY_SHARES' | 'BY_PERCENTAGE' | 'BY_AMOUNT'
+          splitMode?: string
           createdAt?: string
           notes?: string | null
-          recurrenceRule?: 'NONE' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | null
+          recurrenceRule?: string | null
           recurringExpenseLinkId?: string | null
         }
         Update: {
@@ -102,10 +102,10 @@ export interface Database {
           amount?: number
           paidById?: string
           isReimbursement?: boolean
-          splitMode?: 'EVENLY' | 'BY_SHARES' | 'BY_PERCENTAGE' | 'BY_AMOUNT'
+          splitMode?: string
           createdAt?: string
           notes?: string | null
-          recurrenceRule?: 'NONE' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | null
+          recurrenceRule?: string | null
           recurringExpenseLinkId?: string | null
         }
       }
@@ -154,7 +154,7 @@ export interface Database {
           id: string
           groupId: string
           time: string
-          activityType: 'UPDATE_GROUP' | 'CREATE_EXPENSE' | 'UPDATE_EXPENSE' | 'DELETE_EXPENSE'
+          activityType: string
           participantId: string | null
           expenseId: string | null
           data: string | null
@@ -163,7 +163,7 @@ export interface Database {
           id: string
           groupId: string
           time?: string
-          activityType: 'UPDATE_GROUP' | 'CREATE_EXPENSE' | 'UPDATE_EXPENSE' | 'DELETE_EXPENSE'
+          activityType: string
           participantId?: string | null
           expenseId?: string | null
           data?: string | null
@@ -172,7 +172,7 @@ export interface Database {
           id?: string
           groupId?: string
           time?: string
-          activityType?: 'UPDATE_GROUP' | 'CREATE_EXPENSE' | 'UPDATE_EXPENSE' | 'DELETE_EXPENSE'
+          activityType?: string
           participantId?: string | null
           expenseId?: string | null
           data?: string | null
@@ -208,7 +208,7 @@ export interface Database {
 // Client for browser usage (with anon key)
 export const supabase = createClient<Database>(
   env.SUPABASE_URL,
-  env.SUPABASE_API_ANON_KEY
+  env.SUPABASE_API_ANON_KEY,
 )
 
 // Admin client for server usage (with service role)
@@ -218,15 +218,18 @@ export const supabaseAdmin = createClient<Database>(
   {
     auth: {
       autoRefreshToken: false,
-      persistSession: false
-    }
-  }
+      persistSession: false,
+    },
+  },
 )
 
 // Export types for use in the app
-export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row']
-export type Inserts<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Insert']
-export type Updates<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Update']
+export type Tables<T extends keyof Database['public']['Tables']> =
+  Database['public']['Tables'][T]['Row']
+export type Inserts<T extends keyof Database['public']['Tables']> =
+  Database['public']['Tables'][T]['Insert']
+export type Updates<T extends keyof Database['public']['Tables']> =
+  Database['public']['Tables'][T]['Update']
 
 // Helper function to handle Supabase relationship data
 export function normalizeRelation<T>(data: T | T[]): T | null {
@@ -234,4 +237,4 @@ export function normalizeRelation<T>(data: T | T[]): T | null {
     return data.length > 0 ? data[0] : null
   }
   return data || null
-} 
+}

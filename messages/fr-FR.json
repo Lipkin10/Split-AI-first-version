@@ -394,5 +394,99 @@
       "TV/Phone/Internet": "TV/Téléphone/Internet",
       "Water": "Eau"
     }
+  },
+  "conversational": {
+    "title": "Assistant IA",
+    "prompts": {
+      "suggestion": "Essayez l'une de ces options :",
+      "createGroup": "Créer un nouveau groupe pour notre voyage",
+      "addExpense": "J'ai payé 25€ pour le déjeuner",
+      "checkBalance": "Combien dois-je à Sarah ?",
+      "addExpenseDetailed": "J'ai acheté des courses pour 67,50€",
+      "splitBill": "Diviser le dîner 120€ entre 4 personnes",
+      "addReceipt": "Extraire la dépense de ce reçu",
+      "whoOwesWhat": "Montrez-moi qui doit quoi",
+      "settleUp": "Comment devrions-nous régler ?",
+      "viewDebts": "Quelles sont mes dettes en cours ?",
+      "addParticipant": "Ajouter Jean au groupe",
+      "groupSummary": "Donnez-moi un résumé de ce groupe",
+      "exportData": "Exporter les données du groupe"
+    },
+    "responses": {
+      "processing": "Je comprends que vous avez dit : \"{message}\". Laissez-moi vous aider avec cela."
+    },
+    "actions": {
+      "createExpense": "Créer cette dépense",
+      "viewBalances": "Voir les soldes",
+      "createGroup": "Créer un groupe",
+      "editExpense": "Modifier la dépense"
+    },
+    "errors": {
+      "title": "Erreur de Traitement",
+      "processingFailed": "Je n'ai pas pu traiter votre demande. Veuillez réessayer ou utiliser l'interface traditionnelle."
+    },
+    "cleared": {
+      "title": "Conversation Effacée",
+      "description": "Votre historique de conversation a été effacé."
+    },
+    "help": {
+      "title": "Aide de l'Assistant IA",
+      "description": "Demandez-moi n'importe quoi sur la gestion des dépenses, des soldes ou des groupes. Je peux aider à créer des dépenses, vérifier les soldes et plus !"
+    },
+    "input": {
+      "placeholder": "Demandez-moi quelque chose sur les dépenses...",
+      "placeholderWithContext": "Demandez-moi à propos de {context}..."
+    }
+  },
+  "conversation": {
+    "history": {
+      "messages": "{count, plural, =0 {Aucun message} =1 {1 message} other {# messages}}",
+      "empty": "Commencez une conversation en tapant un message ci-dessous.",
+      "emptyWithGroup": "Demandez-moi n'importe quoi sur les dépenses et soldes de ce groupe."
+    },
+    "input": {
+      "placeholder": "Tapez votre message..."
+    }
+  },
+  "Conversation": {
+    "Balance": {
+      "specificOwesYou": "{name} vous doit {amount}",
+      "youOweSpecific": "Vous devez {amount} à {name}",
+      "evenWithSpecific": "Vous et {name} êtes à égalité",
+      "owesYou": "{name} vous doit {amount}",
+      "youOwe": "Vous devez {amount} à {name}",
+      "evenWith": "Vous et {name} êtes à égalité",
+      "needSpecificPerson": "Avec quelle personne souhaitez-vous vérifier le solde ?",
+      "participantNotFound": "Je n'ai pas trouvé '{name}' dans ce groupe.",
+      "availableParticipants": "Participants disponibles",
+      "balanceWith": "Solde avec {name}",
+      "paid": "Total payé",
+      "paidFor": "Part des dépenses",
+      "showAllBalances": "Montrez-moi tous les soldes",
+      "viewAllBalances": "Voir tous les soldes",
+      "howToSettle": "Comment devrions-nous régler ?",
+      "allBalances": "Tous les soldes",
+      "quickInsights": "Aperçus rapides",
+      "totalParticipants": "{count, plural, =1 {1 participant} other {# participants}}",
+      "activeBalances": "{count, plural, =0 {Aucun solde actif} =1 {1 solde actif} other {# soldes actifs}}",
+      "suggestedReimbursements": "{count, plural, =0 {Aucun remboursement nécessaire} =1 {1 remboursement} other {# remboursements}}",
+      "showReimbursements": "Voir les remboursements",
+      "suggestedSettlements": "Règlements suggérés",
+      "allSettled": "Tous les soldes sont réglés ! 🎉",
+      "optimizationTip": "💡 Conseil d'optimisation",
+      "optimizationExplanation": "Ces suggestions minimisent le nombre de transactions nécessaires pour régler tous les soldes.",
+      "traditionalView": "Vue traditionnelle",
+      "needSpecificPersonReimbursement": "De quelle personne parlez-vous ?",
+      "reimbursementStatus": "Statut de remboursement avec {name}",
+      "allSettledWith": "Tout est réglé avec {name} ! ✅",
+      "stillOwesYou": "{name} vous doit encore {amount}",
+      "youStillOwe": "Vous devez encore {amount} à {name}",
+      "seeDetails": "Voir les détails",
+      "historicalNote": "📊 Requête de solde historique",
+      "historicalExplanation": "Les requêtes de solde historique arrivent bientôt ! Pour l'instant, voici vos soldes actuels.",
+      "currentBalances": "Soldes actuels",
+      "viewCurrentBalances": "Voir les soldes actuels",
+      "unknownQueryType": "Je ne suis pas sûr de quelles informations de solde vous recherchez. Voici vos soldes actuels :"
+    }
   }
 }

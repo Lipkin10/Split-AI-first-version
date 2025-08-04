@@ -1,4 +1,4 @@
-import { RecurrenceRule, SplitMode } from '@prisma/client'
+import { RecurrenceRule, SplitMode } from '@/lib/api'
 import * as z from 'zod'
 
 export const groupFormSchema = z

@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { randomId } from '@/lib/api'
-import { prisma } from '@/lib/prisma'
-import { Prisma } from '@prisma/client'
+import { supabaseAdmin } from '@/lib/supabase'
 import { Client } from 'pg'
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -9,7 +8,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 async function main() {
   withClient(async (client) => {
     // console.log('Deleting all groups…')
-    // await prisma.group.deleteMany({})
+    // await supabaseAdmin.from('Group').delete().neq('id', '')
 
     const { rows: groupRows } = await client.query<{
       id: string
@@ -18,27 +17,47 @@ async function main() {
       created_at: Date
     }>('select id, name, currency, created_at from groups')
 
-    const existingGroups = (
-      await prisma.group.findMany({ select: { id: true } })
-    ).map((group) => group.id)
+    const { data: existingGroups } = await supabaseAdmin
+      .from('Group')
+      .select('id')
+
+    const existingGroupIds = (existingGroups || []).map((group) => group.id)
 
     for (const groupRow of groupRows) {
-      const participants: Prisma.ParticipantCreateManyInput[] = []
-      const expenses: Prisma.ExpenseCreateManyInput[] = []
-      const expenseParticipants: Prisma.ExpensePaidForCreateManyInput[] = []
+      const participants: Array<{
+        id: string
+        name: string
+        groupId: string
+      }> = []
+      const expenses: Array<{
+        id: string
+        amount: number
+        groupId: string
+        title: string
+        categoryId: number
+        expenseDate: string
+        createdAt: string
+        isReimbursement: boolean
+        paidById: string
+      }> = []
+      const expenseParticipants: Array<{
+        expenseId: string
+        participantId: string
+        shares: number
+      }> = []
       const participantIdsMapping: Record<number, string> = {}
       const expenseIdsMapping: Record<number, string> = {}
 
-      if (existingGroups.includes(groupRow.id)) {
+      if (existingGroupIds.includes(groupRow.id)) {
         console.log(`Group ${groupRow.id} already exists, skipping.`)
         continue
       }
 
-      const group: Prisma.GroupCreateInput = {
+      const group = {
         id: groupRow.id,
         name: groupRow.name,
         currency: groupRow.currency,
-        createdAt: groupRow.created_at,
+        createdAt: groupRow.created_at.toISOString(),
       }
 
       const { rows: participantRows } = await client.query<{
@@ -79,8 +98,10 @@ async function main() {
           groupId: groupRow.id,
           title: expenseRow.description,
           categoryId: 1,
-          expenseDate: new Date(expenseRow.created_at.toDateString()),
-          createdAt: expenseRow.created_at,
+          expenseDate: new Date(expenseRow.created_at.toDateString())
+            .toISOString()
+            .split('T')[0],
+          createdAt: expenseRow.created_at.toISOString(),
           isReimbursement: expenseRow.is_reimbursement === true,
           paidById: participantIdsMapping[expenseRow.paid_by_participant_id],
         })
@@ -99,18 +120,25 @@ async function main() {
             expenseId: expenseIdsMapping[expenseParticipantRow.expense_id],
             participantId:
               participantIdsMapping[expenseParticipantRow.participant_id],
+            shares: 1, // Default share value
           })
         }
       }
 
       console.log('Creating group:', group)
-      await prisma.group.create({ data: group })
+      await supabaseAdmin.from('Group').insert(group)
       console.log('Creating participants:', participants)
-      await prisma.participant.createMany({ data: participants })
+      if (participants.length > 0) {
+        await supabaseAdmin.from('Participant').insert(participants)
+      }
       console.log('Creating expenses:', expenses)
-      await prisma.expense.createMany({ data: expenses })
+      if (expenses.length > 0) {
+        await supabaseAdmin.from('Expense').insert(expenses)
+      }
       console.log('Creating expenseParticipants:', expenseParticipants)
-      await prisma.expensePaidFor.createMany({ data: expenseParticipants })
+      if (expenseParticipants.length > 0) {
+        await supabaseAdmin.from('ExpensePaidFor').insert(expenseParticipants)
+      }
     }
   })
 }

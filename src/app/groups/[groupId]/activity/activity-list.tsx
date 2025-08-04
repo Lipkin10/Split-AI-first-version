@@ -1,7 +1,7 @@
 'use client'
 import {
-  Activity,
   ActivityItem,
+  Activity as ActivityType,
 } from '@/app/groups/[groupId]/activity/activity-item'
 import { Skeleton } from '@/components/ui/skeleton'
 import { trpc } from '@/trpc/client'
@@ -47,7 +47,7 @@ function getDateGroup(date: Dayjs, today: Dayjs) {
   }
 }
 
-function getGroupedActivitiesByDate(activities: Activity[]) {
+function getGroupedActivitiesByDate(activities: ActivityType[]) {
   const today = dayjs()
   return activities.reduce(
     (result, activity) => {
@@ -57,7 +57,7 @@ function getGroupedActivitiesByDate(activities: Activity[]) {
       return result
     },
     {} as {
-      [key: string]: Activity[]
+      [key: string]: ActivityType[]
     },
   )
 }
@@ -127,7 +127,7 @@ export function ActivityList() {
             >
               {t(`Groups.${dateGroup}`)}
             </div>
-            {groupActivities.map((activity) => {
+            {groupActivities.map((activity: ActivityType) => {
               const participant =
                 activity.participantId !== null
                   ? group.participants.find(

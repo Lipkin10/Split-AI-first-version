@@ -2,5 +2,5 @@
 
 set -euxo pipefail
 
-npx prisma migrate deploy
+# Database migrations now handled by Supabase
 exec npm run start

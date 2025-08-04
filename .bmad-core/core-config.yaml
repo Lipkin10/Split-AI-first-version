@@ -2,7 +2,7 @@ markdownExploder: true
 prd:
   prdFile: docs/prd.md
   prdVersion: v4
-  prdSharded: false
+  prdSharded: true
   prdShardedLocation: docs/prd
   epicFilePattern: epic-{n}*.md
 architecture:

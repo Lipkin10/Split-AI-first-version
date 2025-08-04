@@ -1,8 +1,8 @@
 'use client'
 import { Button } from '@/components/ui/button'
+import { Participant } from '@/lib/api'
 import { DateTimeStyle, cn, formatDate } from '@/lib/utils'
 import { AppRouterOutput } from '@/trpc/routers/_app'
-import { ActivityType, Participant } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
@@ -31,13 +31,13 @@ function useSummary(activity: Activity, participantName?: string) {
       strong: (chunks) => <strong>{chunks}</strong>,
     })
 
-  if (activity.activityType == ActivityType.UPDATE_GROUP) {
+  if (activity.activityType == 'UPDATE_GROUP') {
     return <>{tr('settingsModified')}</>
-  } else if (activity.activityType == ActivityType.CREATE_EXPENSE) {
+  } else if (activity.activityType == 'CREATE_EXPENSE') {
     return <>{tr('expenseCreated')}</>
-  } else if (activity.activityType == ActivityType.UPDATE_EXPENSE) {
+  } else if (activity.activityType == 'UPDATE_EXPENSE') {
     return <>{tr('expenseUpdated')}</>
-  } else if (activity.activityType == ActivityType.DELETE_EXPENSE) {
+  } else if (activity.activityType == 'DELETE_EXPENSE') {
     return <>{tr('expenseDeleted')}</>
   }
 }

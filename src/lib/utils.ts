@@ -1,9 +1,31 @@
-import { Category } from '@prisma/client'
+import { Category } from '@/lib/api'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+/**
+ * Extracts the current page context from a pathname for conversational AI
+ * @param pathname - The current route pathname
+ * @returns A string representing the current page context
+ */
+export function getCurrentPageFromPath(pathname: string): string {
+  if (pathname === '/') return 'home'
+  if (pathname === '/groups') return 'groups'
+  if (pathname.includes('/groups/') && pathname.includes('/expenses'))
+    return 'expenses'
+  if (pathname.includes('/groups/') && pathname.includes('/balances'))
+    return 'balances'
+  if (pathname.includes('/groups/') && pathname.includes('/stats'))
+    return 'stats'
+  if (pathname.includes('/groups/') && pathname.includes('/activity'))
+    return 'activity'
+  if (pathname.includes('/groups/') && pathname.includes('/information'))
+    return 'information'
+  if (pathname.includes('/groups/') && !pathname.includes('/')) return 'group'
+  return 'general'
 }
 
 export function delay(ms: number) {

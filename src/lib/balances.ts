@@ -1,5 +1,4 @@
-import { getGroupExpenses } from '@/lib/api'
-import { Participant } from '@prisma/client'
+import { Participant, getGroupExpenses } from '@/lib/api'
 import { match } from 'ts-pattern'
 
 export type Balances = Record<

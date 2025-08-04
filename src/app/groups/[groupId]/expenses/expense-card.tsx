@@ -61,6 +61,7 @@ export function ExpenseCard({ expense, currency, groupId }: Props) {
             <div className="flex items-center gap-1">
               <DocumentsCount count={expense._count?.documents ?? 0} />
               <ActiveUserBalance
+                groupId={groupId}
                 expense={expense}
                 currency={currency}
                 className="text-right"

@@ -9,12 +9,12 @@ const envSchema = z
   .object({
     // Postgres URLs (keeping for now during transition)
     POSTGRES_URL_NON_POOLING: z.string().url().optional(),
-    POSTGRES_PRISMA_URL: z.string().url().optional(),
+
     // Supabase configuration
     SUPABASE_URL: z.string().url(),
     SUPABASE_API_ANON_KEY: z.string(),
     SUPABASE_SERVICE_ROLE: z.string(),
-    SUPABASE_POSTGRES_URL: z.string().url(),
+    SUPABASE_POSTGRES_URL: z.string().optional(),
     NEXT_PUBLIC_BASE_URL: z
       .string()
       .optional()
@@ -41,6 +41,10 @@ const envSchema = z
       interpretEnvVarAsBool,
       z.boolean().default(false),
     ),
+    NEXT_PUBLIC_ENABLE_CONVERSATIONAL_EXPENSE: z.preprocess(
+      interpretEnvVarAsBool,
+      z.boolean().default(false),
+    ),
     OPENAI_API_KEY: z.string().optional(),
   })
   .superRefine((env, ctx) => {
@@ -60,13 +64,14 @@ const envSchema = z
     }
     if (
       (env.NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT ||
-        env.NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT) &&
+        env.NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT ||
+        env.NEXT_PUBLIC_ENABLE_CONVERSATIONAL_EXPENSE) &&
       !env.OPENAI_API_KEY
     ) {
       ctx.addIssue({
         code: ZodIssueCode.custom,
         message:
-          'If NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT or NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT is specified, then OPENAI_API_KEY must be specified too',
+          'If NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT, NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT, or NEXT_PUBLIC_ENABLE_CONVERSATIONAL_EXPENSE is specified, then OPENAI_API_KEY must be specified too',
       })
     }
   })

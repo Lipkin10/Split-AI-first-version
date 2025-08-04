@@ -1,11 +1,32 @@
-import { supabaseAdmin, normalizeRelation } from '@/lib/supabase'
 import { ExpenseFormValues, GroupFormValues } from '@/lib/schemas'
+import { normalizeRelation, supabaseAdmin } from '@/lib/supabase'
 import { nanoid } from 'nanoid'
 
-// Define types to replace Prisma types
-export type ActivityType = 'UPDATE_GROUP' | 'CREATE_EXPENSE' | 'UPDATE_EXPENSE' | 'DELETE_EXPENSE'
-export type SplitMode = 'EVENLY' | 'BY_SHARES' | 'BY_PERCENTAGE' | 'BY_AMOUNT'
-export type RecurrenceRule = 'NONE' | 'DAILY' | 'WEEKLY' | 'MONTHLY'
+// Define types and enums to replace Prisma types
+export type ActivityType =
+  | 'UPDATE_GROUP'
+  | 'CREATE_EXPENSE'
+  | 'UPDATE_EXPENSE'
+  | 'DELETE_EXPENSE'
+
+export const SplitMode = {
+  EVENLY: 'EVENLY',
+  BY_SHARES: 'BY_SHARES',
+  BY_PERCENTAGE: 'BY_PERCENTAGE',
+  BY_AMOUNT: 'BY_AMOUNT',
+} as const
+
+export type SplitMode = (typeof SplitMode)[keyof typeof SplitMode]
+
+export const RecurrenceRule = {
+  NONE: 'NONE',
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+} as const
+
+export type RecurrenceRule =
+  (typeof RecurrenceRule)[keyof typeof RecurrenceRule]
 
 // Define proper interfaces for Supabase relationship data
 export interface Participant {
@@ -93,7 +114,7 @@ export function randomId() {
 
 export async function createGroup(groupFormValues: GroupFormValues) {
   const groupId = randomId()
-  
+
   // Insert group
   const { data: group } = await supabaseAdmin
     .from('Group')
@@ -105,19 +126,19 @@ export async function createGroup(groupFormValues: GroupFormValues) {
     })
     .select()
     .single()
-  
+
   // Insert participants
   const participantsData = groupFormValues.participants.map(({ name }) => ({
     id: randomId(),
     name,
     groupId,
   }))
-  
+
   const { data: participants } = await supabaseAdmin
     .from('Participant')
     .insert(participantsData)
     .select()
-  
+
   return {
     ...group,
     participants: participants || [],
@@ -148,7 +169,7 @@ export async function createExpense(
   })
 
   const isCreateRecurrence = expenseFormValues.recurrenceRule !== 'NONE'
-  
+
   // Create the expense
   const { data: expense } = await supabaseAdmin
     .from('Expense')
@@ -175,13 +196,11 @@ export async function createExpense(
       expenseFormValues.expenseDate,
       groupId,
     )
-    
-    await supabaseAdmin
-      .from('RecurringExpenseLink')
-      .insert({
-        ...recurringExpenseLinkPayload,
-        currentFrameExpenseId: expenseId,
-      })
+
+    await supabaseAdmin.from('RecurringExpenseLink').insert({
+      ...recurringExpenseLinkPayload,
+      currentFrameExpenseId: expenseId,
+    })
 
     // Update expense with recurring link ID
     await supabaseAdmin
@@ -196,11 +215,9 @@ export async function createExpense(
     participantId: paidFor.participant,
     shares: paidFor.shares,
   }))
-  
+
   if (paidForData.length > 0) {
-    await supabaseAdmin
-      .from('ExpensePaidFor')
-      .insert(paidForData)
+    await supabaseAdmin.from('ExpensePaidFor').insert(paidForData)
   }
 
   // Create document entries
@@ -212,10 +229,8 @@ export async function createExpense(
       height: doc.height,
       expenseId,
     }))
-    
-    await supabaseAdmin
-      .from('ExpenseDocument')
-      .insert(documentsData)
+
+    await supabaseAdmin.from('ExpenseDocument').insert(documentsData)
   }
 
   return expense as Expense
@@ -233,20 +248,19 @@ export async function deleteExpense(
     data: existingExpense?.title,
   })
 
-  await supabaseAdmin
-    .from('Expense')
-    .delete()
-    .eq('id', expenseId)
+  await supabaseAdmin.from('Expense').delete().eq('id', expenseId)
 }
 
 export async function getGroupExpensesParticipants(groupId: string) {
   const expenses = await getGroupExpenses(groupId)
   return Array.from(
     new Set(
-      expenses.flatMap((e) => [
-        normalizeRelation(e.paidBy)?.id,
-        ...e.paidFor.map((pf) => normalizeRelation(pf.participant)?.id),
-      ]).filter(Boolean),
+      expenses
+        .flatMap((e) => [
+          normalizeRelation(e.paidBy)?.id,
+          ...e.paidFor.map((pf) => normalizeRelation(pf.participant)?.id),
+        ])
+        .filter(Boolean),
     ),
   )
 }
@@ -256,7 +270,7 @@ export async function getGroups(groupIds: string[]) {
     .from('Group')
     .select('*')
     .in('id', groupIds)
-  
+
   if (!groups) return []
 
   // Get participant counts separately
@@ -266,15 +280,15 @@ export async function getGroups(groupIds: string[]) {
         .from('Participant')
         .select('*', { count: 'exact', head: true })
         .eq('groupId', group.id)
-      
+
       return {
         ...group,
         _count: { participants: count || 0 },
         createdAt: group.createdAt,
       }
-    })
+    }),
   )
-  
+
   return groupsWithCounts
 }
 
@@ -312,7 +326,7 @@ export async function updateExpense(
   const isUpdateRecurrenceExpenseLink =
     existingExpense.recurrenceRule !== expenseFormValues.recurrenceRule &&
     existingExpense.recurringExpenseLink?.nextExpenseCreatedAt === null
-    
+
   const isCreateRecurrenceExpenseLink =
     existingExpense.recurrenceRule === 'NONE' &&
     expenseFormValues.recurrenceRule !== 'NONE' &&
@@ -342,7 +356,7 @@ export async function updateExpense(
       .from('RecurringExpenseLink')
       .delete()
       .eq('id', existingExpense.recurringExpenseLink.id)
-    
+
     await supabaseAdmin
       .from('Expense')
       .update({ recurringExpenseLinkId: null })
@@ -354,7 +368,7 @@ export async function updateExpense(
       expenseFormValues.recurrenceRule as RecurrenceRule,
       new Date(existingExpense.expenseDate),
     )
-    
+
     await supabaseAdmin
       .from('RecurringExpenseLink')
       .update({ nextExpenseDate: updatedNextExpenseDate.toISOString() })
@@ -367,13 +381,11 @@ export async function updateExpense(
       expenseFormValues.expenseDate,
       groupId,
     )
-    
-    await supabaseAdmin
-      .from('RecurringExpenseLink')
-      .insert({
-        ...newRecurringExpenseLink,
-        currentFrameExpenseId: expenseId,
-      })
+
+    await supabaseAdmin.from('RecurringExpenseLink').insert({
+      ...newRecurringExpenseLink,
+      currentFrameExpenseId: expenseId,
+    })
 
     await supabaseAdmin
       .from('Expense')
@@ -382,11 +394,15 @@ export async function updateExpense(
   }
 
   // Handle paidFor relationships
-  const existingPaidForIds = existingExpense.paidFor.map(pf => pf.participantId)
-  const formPaidForIds = expenseFormValues.paidFor.map(pf => pf.participant)
+  const existingPaidForIds = existingExpense.paidFor.map(
+    (pf) => pf.participantId,
+  )
+  const formPaidForIds = expenseFormValues.paidFor.map((pf) => pf.participant)
 
   // Delete paidFor entries that are no longer in the form
-  const paidForToDelete = existingPaidForIds.filter(id => !formPaidForIds.includes(id))
+  const paidForToDelete = existingPaidForIds.filter(
+    (id) => !formPaidForIds.includes(id),
+  )
   if (paidForToDelete.length > 0) {
     await supabaseAdmin
       .from('ExpensePaidFor')
@@ -397,41 +413,38 @@ export async function updateExpense(
 
   // Upsert paidFor entries
   for (const paidFor of expenseFormValues.paidFor) {
-    const { error } = await supabaseAdmin
-      .from('ExpensePaidFor')
-      .upsert({
-        expenseId,
-        participantId: paidFor.participant,
-        shares: paidFor.shares,
-      })
-    
+    const { error } = await supabaseAdmin.from('ExpensePaidFor').upsert({
+      expenseId,
+      participantId: paidFor.participant,
+      shares: paidFor.shares,
+    })
+
     if (error) {
       console.error('Error upserting ExpensePaidFor:', error)
     }
   }
 
   // Handle documents
-  const existingDocIds = existingExpense.documents.map(doc => doc.id)
-  const formDocIds = expenseFormValues.documents.map(doc => doc.id)
+  const existingDocIds = existingExpense.documents.map((doc) => doc.id)
+  const formDocIds = expenseFormValues.documents.map((doc) => doc.id)
 
   // Delete documents that are no longer in the form
-  const docsToDelete = existingDocIds.filter(id => !formDocIds.includes(id))
+  const docsToDelete = existingDocIds.filter((id) => !formDocIds.includes(id))
   if (docsToDelete.length > 0) {
-    await supabaseAdmin
-      .from('ExpenseDocument')
-      .delete()
-      .in('id', docsToDelete)
+    await supabaseAdmin.from('ExpenseDocument').delete().in('id', docsToDelete)
   }
 
   // Create new documents
-  const newDocs = expenseFormValues.documents.filter(doc => !existingDocIds.includes(doc.id))
+  const newDocs = expenseFormValues.documents.filter(
+    (doc) => !existingDocIds.includes(doc.id),
+  )
   if (newDocs.length > 0) {
-    await supabaseAdmin
-      .from('ExpenseDocument')
-      .insert(newDocs.map(doc => ({
+    await supabaseAdmin.from('ExpenseDocument').insert(
+      newDocs.map((doc) => ({
         ...doc,
         expenseId,
-      })))
+      })),
+    )
   }
 
   return updatedExpense
@@ -460,14 +473,14 @@ export async function updateGroup(
     .single()
 
   // Handle participant updates
-  const existingParticipantIds = existingGroup.participants.map(p => p.id)
+  const existingParticipantIds = existingGroup.participants.map((p) => p.id)
   const formParticipantIds = groupFormValues.participants
-    .filter(p => p.id)
-    .map(p => p.id)
+    .filter((p) => p.id)
+    .map((p) => p.id)
 
   // Delete participants that are no longer in the form
   const participantsToDelete = existingParticipantIds.filter(
-    id => !formParticipantIds.includes(id)
+    (id) => !formParticipantIds.includes(id),
   )
   if (participantsToDelete.length > 0) {
     await supabaseAdmin
@@ -488,17 +501,15 @@ export async function updateGroup(
 
   // Create new participants
   const newParticipants = groupFormValues.participants
-    .filter(p => !p.id)
-    .map(p => ({
+    .filter((p) => !p.id)
+    .map((p) => ({
       id: randomId(),
       name: p.name,
       groupId,
     }))
 
   if (newParticipants.length > 0) {
-    await supabaseAdmin
-      .from('Participant')
-      .insert(newParticipants)
+    await supabaseAdmin.from('Participant').insert(newParticipants)
   }
 
   return updatedGroup
@@ -507,13 +518,15 @@ export async function updateGroup(
 export async function getGroup(groupId: string): Promise<Group | null> {
   const { data: group } = await supabaseAdmin
     .from('Group')
-    .select(`
+    .select(
+      `
       *,
       participants:Participant(*)
-    `)
+    `,
+    )
     .eq('id', groupId)
     .single()
-  
+
   return group as Group
 }
 
@@ -522,7 +535,7 @@ export async function getCategories() {
     .from('Category')
     .select('*')
     .order('id')
-  
+
   return categories || []
 }
 
@@ -534,7 +547,8 @@ export async function getGroupExpenses(
 
   let query = supabaseAdmin
     .from('Expense')
-    .select(`
+    .select(
+      `
       amount,
       category:Category(*),
       createdAt,
@@ -549,7 +563,8 @@ export async function getGroupExpenses(
       splitMode,
       recurrenceRule,
       title
-    `)
+    `,
+    )
     .eq('groupId', groupId)
     .order('expenseDate', { ascending: false })
     .order('createdAt', { ascending: false })
@@ -575,15 +590,19 @@ export async function getGroupExpenses(
         .from('ExpenseDocument')
         .select('*', { count: 'exact', head: true })
         .eq('expenseId', expense.id)
-      
+
       return {
         ...expense,
         // Normalize relationship data for compatibility
-        paidBy: Array.isArray(expense.paidBy) ? expense.paidBy[0] : expense.paidBy,
-        category: Array.isArray(expense.category) ? expense.category[0] : expense.category,
+        paidBy: Array.isArray(expense.paidBy)
+          ? expense.paidBy[0]
+          : expense.paidBy,
+        category: Array.isArray(expense.category)
+          ? expense.category[0]
+          : expense.category,
         _count: { documents: count || 0 },
       } as Expense
-    })
+    }),
   )
 
   return expensesWithCounts
@@ -594,14 +613,18 @@ export async function getGroupExpenseCount(groupId: string) {
     .from('Expense')
     .select('*', { count: 'exact', head: true })
     .eq('groupId', groupId)
-  
+
   return count || 0
 }
 
-export async function getExpense(groupId: string, expenseId: string): Promise<Expense | null> {
+export async function getExpense(
+  groupId: string,
+  expenseId: string,
+): Promise<Expense | null> {
   const { data: expense } = await supabaseAdmin
     .from('Expense')
-    .select(`
+    .select(
+      `
       *,
       paidBy:Participant!paidById(*),
       paidFor:ExpensePaidFor(
@@ -611,21 +634,24 @@ export async function getExpense(groupId: string, expenseId: string): Promise<Ex
       category:Category(*),
       documents:ExpenseDocument(*),
       recurringExpenseLink:RecurringExpenseLink(*)
-    `)
+    `,
+    )
     .eq('id', expenseId)
     .single()
-  
+
   if (!expense) return null
 
   // Normalize the relationship data
   return {
     ...expense,
     paidBy: Array.isArray(expense.paidBy) ? expense.paidBy[0] : expense.paidBy,
-    category: Array.isArray(expense.category) ? expense.category[0] : expense.category,
+    category: Array.isArray(expense.category)
+      ? expense.category[0]
+      : expense.category,
     documents: expense.documents || [],
     paidFor: expense.paidFor || [],
-    recurringExpenseLink: Array.isArray(expense.recurringExpenseLink) 
-      ? expense.recurringExpenseLink[0] 
+    recurringExpenseLink: Array.isArray(expense.recurringExpenseLink)
+      ? expense.recurringExpenseLink[0]
       : expense.recurringExpenseLink,
   } as Expense
 }
@@ -641,7 +667,10 @@ export async function getActivities(
     .order('time', { ascending: false })
 
   if (options?.offset) {
-    query = query.range(options.offset, (options.offset + (options.length || 20)) - 1)
+    query = query.range(
+      options.offset,
+      options.offset + (options.length || 20) - 1,
+    )
   } else if (options?.length) {
     query = query.limit(options.length)
   }
@@ -686,7 +715,7 @@ export async function logActivity(
     })
     .select()
     .single()
-  
+
   return data
 }
 
@@ -702,9 +731,11 @@ async function createRecurringExpenses() {
     ),
   )
 
-  const { data: recurringExpenseLinksWithExpensesToCreate } = await supabaseAdmin
-    .from('RecurringExpenseLink')
-    .select(`
+  const { data: recurringExpenseLinksWithExpensesToCreate } =
+    await supabaseAdmin
+      .from('RecurringExpenseLink')
+      .select(
+        `
       *,
       currentFrameExpense:Expense!currentFrameExpenseId(
         *,
@@ -716,11 +747,13 @@ async function createRecurringExpenses() {
         category:Category(*),
         documents:ExpenseDocument(*)
       )
-    `)
-    .is('nextExpenseCreatedAt', null)
-    .lte('nextExpenseDate', utcDateFromLocal.toISOString())
+    `,
+      )
+      .is('nextExpenseCreatedAt', null)
+      .lte('nextExpenseDate', utcDateFromLocal.toISOString())
 
-  for (const recurringExpenseLink of recurringExpenseLinksWithExpensesToCreate || []) {
+  for (const recurringExpenseLink of recurringExpenseLinksWithExpensesToCreate ||
+    []) {
     let newExpenseDate = new Date(recurringExpenseLink.nextExpenseDate)
     let currentExpenseRecord = recurringExpenseLink.currentFrameExpense
     let currentRecurringExpenseLinkId = recurringExpenseLink.id
@@ -756,26 +789,22 @@ async function createRecurringExpenses() {
           .single()
 
         // Create new recurring expense link
-        await supabaseAdmin
-          .from('RecurringExpenseLink')
-          .insert({
-            id: newRecurringExpenseLinkId,
-            groupId: currentExpenseRecord.groupId,
-            currentFrameExpenseId: newExpenseId,
-            nextExpenseDate: newRecurringExpenseNextExpenseDate.toISOString(),
-          })
+        await supabaseAdmin.from('RecurringExpenseLink').insert({
+          id: newRecurringExpenseLinkId,
+          groupId: currentExpenseRecord.groupId,
+          currentFrameExpenseId: newExpenseId,
+          nextExpenseDate: newRecurringExpenseNextExpenseDate.toISOString(),
+        })
 
         // Create ExpensePaidFor entries
         if (currentExpenseRecord.paidFor?.length > 0) {
-          await supabaseAdmin
-            .from('ExpensePaidFor')
-            .insert(
-              currentExpenseRecord.paidFor.map((paidFor) => ({
-                expenseId: newExpenseId,
-                participantId: paidFor.participantId,
-                shares: paidFor.shares,
-              }))
-            )
+          await supabaseAdmin.from('ExpensePaidFor').insert(
+            currentExpenseRecord.paidFor.map((paidFor: any) => ({
+              expenseId: newExpenseId,
+              participantId: paidFor.participantId,
+              shares: paidFor.shares,
+            })),
+          )
         }
 
         // Connect documents (they can be shared across recurring expenses)
@@ -783,7 +812,10 @@ async function createRecurringExpenses() {
           await supabaseAdmin
             .from('ExpenseDocument')
             .update({ expenseId: newExpenseId })
-            .in('id', currentExpenseRecord.documents.map(doc => doc.id))
+            .in(
+              'id',
+              currentExpenseRecord.documents.map((doc: any) => doc.id),
+            )
         }
 
         // Mark the current RecurringExpenseLink as completed
@@ -794,12 +826,19 @@ async function createRecurringExpenses() {
           .is('nextExpenseCreatedAt', null)
 
         // Update for next iteration
-        currentExpenseRecord = { ...newExpense, paidFor: currentExpenseRecord.paidFor, documents: currentExpenseRecord.documents }
+        currentExpenseRecord = {
+          ...newExpense,
+          paidFor: currentExpenseRecord.paidFor,
+          documents: currentExpenseRecord.documents,
+        }
         currentRecurringExpenseLinkId = newRecurringExpenseLinkId
         newExpenseDate = newRecurringExpenseNextExpenseDate
-
       } catch (error) {
-        console.error('Failed to create recurring expense for expenseId:', currentExpenseRecord.id, error)
+        console.error(
+          'Failed to create recurring expense for expenseId:',
+          currentExpenseRecord.id,
+          error,
+        )
         break
       }
     }
@@ -809,7 +848,7 @@ async function createRecurringExpenses() {
 function createPayloadForNewRecurringExpenseLink(
   recurrenceRule: RecurrenceRule,
   priorDateToNextRecurrence: Date,
-  groupId: String,
+  groupId: string,
 ): RecurringExpenseLink {
   const nextExpenseDate = calculateNextDate(
     recurrenceRule,
@@ -820,7 +859,7 @@ function createPayloadForNewRecurringExpenseLink(
   const recurringExpenseLinkPayload = {
     id: recurringExpenseLinkId,
     groupId: groupId,
-    nextExpenseDate: nextExpenseDate,
+    nextExpenseDate: nextExpenseDate.toISOString(),
   }
 
   return {

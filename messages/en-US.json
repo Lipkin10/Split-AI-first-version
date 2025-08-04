@@ -217,6 +217,29 @@
     "cancel": "Cancel",
     "reimbursement": "Reimbursement"
   },
+  "ConversationalExpenseForm": {
+    "extractingTitle": "Analyzing your expense...",
+    "extractingDescription": "AI is processing your message to extract expense details.",
+    "processing": "Processing...",
+    "originalMessage": "Your message:",
+    "extractionFailed": "Unable to process expense",
+    "defaultError": "I had trouble understanding your expense request.",
+    "issues": "Issues found:",
+    "cancel": "Cancel",
+    "useManualEntry": "Use Manual Entry",
+    "extractionSuccess": "Expense details extracted",
+    "confidence": "confidence",
+    "confirmDescription": "Please review and confirm the expense details below.",
+    "extractedAmount": "Amount",
+    "extractedTitle": "Description",
+    "extractedParticipants": "Participants",
+    "extractedDate": "Date",
+    "edit": "Edit Details",
+    "creating": "Creating...",
+    "confirmCreate": "Confirm & Create Expense",
+    "editExpense": "Edit Expense Details",
+    "editDescription": "Modify the expense details and create when ready."
+  },
   "ExpenseDocumentsInput": {
     "TooBigToast": {
       "title": "The file is too big",
@@ -395,6 +418,106 @@
       "Trash": "Trash",
       "TV/Phone/Internet": "TV/Phone/Internet",
       "Water": "Water"
+    }
+  },
+  "conversational": {
+    "title": "AI Assistant",
+    "prompts": {
+      "suggestion": "Try one of these:",
+      "createGroup": "Create a new group for our trip",
+      "addExpense": "I paid $25 for lunch",
+      "checkBalance": "How much do I owe Sarah?",
+      "addExpenseDetailed": "I bought groceries for $67.50",
+      "splitBill": "Split dinner $120 between 4 people",
+      "addReceipt": "Extract expense from this receipt",
+      "whoOwesWhat": "Show me who owes what",
+      "settleUp": "How should we settle up?",
+      "viewDebts": "What are my outstanding debts?",
+      "addParticipant": "Add John to the group",
+      "groupSummary": "Give me a summary of this group",
+      "exportData": "Export our group data"
+    },
+    "responses": {
+      "processing": "I understand you said: \"{message}\". Let me help you with that."
+    },
+    "actions": {
+      "createExpense": "Create this expense",
+      "viewBalances": "View balances",
+      "createGroup": "Create group",
+      "editExpense": "Edit expense"
+    },
+    "errors": {
+      "title": "Processing Error",
+      "processingFailed": "I couldn't process your request. Please try again or use the traditional interface."
+    },
+    "success": {
+      "expenseCreated": "Expense Created",
+      "expenseCreatedDescription": "Your expense has been successfully created!"
+    },
+    "cleared": {
+      "title": "Conversation Cleared",
+      "description": "Your conversation history has been cleared."
+    },
+    "help": {
+      "title": "AI Assistant Help",
+      "description": "Ask me anything about managing expenses, balances, or groups. I can help create expenses, check balances, and more!",
+      "examples": "Example phrases:"
+    },
+    "input": {
+      "placeholder": "Ask me anything about expenses...",
+      "placeholderWithContext": "Ask me about {context}...",
+      "expenseCreationPlaceholder": "Creating expense..."
+    }
+  },
+  "Conversation": {
+    "Balance": {
+      "specificOwesYou": "{name} owes you {amount}",
+      "youOweSpecific": "You owe {name} {amount}",
+      "evenWithSpecific": "You and {name} are even",
+      "owesYou": "{name} owes you {amount}",
+      "youOwe": "You owe {name} {amount}",
+      "evenWith": "You and {name} are even",
+      "needSpecificPerson": "Which person would you like to check the balance with?",
+      "participantNotFound": "I couldn't find '{name}' in this group.",
+      "availableParticipants": "Available participants",
+      "balanceWith": "Balance with {name}",
+      "paid": "Total paid",
+      "paidFor": "Share of expenses",
+      "showAllBalances": "Show me all balances",
+      "viewAllBalances": "View all balances",
+      "howToSettle": "How should we settle up?",
+      "allBalances": "All balances",
+      "quickInsights": "Quick insights",
+      "totalParticipants": "{count, plural, =1 {1 participant} other {# participants}}",
+      "activeBalances": "{count, plural, =0 {No active balances} =1 {1 active balance} other {# active balances}}",
+      "suggestedReimbursements": "{count, plural, =0 {No reimbursements needed} =1 {1 reimbursement} other {# reimbursements}}",
+      "showReimbursements": "Show reimbursements",
+      "suggestedSettlements": "Suggested settlements",
+      "allSettled": "All balances are settled! 🎉",
+      "optimizationTip": "💡 Optimization tip",
+      "optimizationExplanation": "These suggestions minimize the number of transactions needed to settle all balances.",
+      "traditionalView": "Traditional view",
+      "needSpecificPersonReimbursement": "Which person are you asking about?",
+      "reimbursementStatus": "Reimbursement status with {name}",
+      "allSettledWith": "All settled with {name}! ✅",
+      "stillOwesYou": "{name} still owes you {amount}",
+      "youStillOwe": "You still owe {name} {amount}",
+      "seeDetails": "See details",
+      "historicalNote": "📊 Historical Balance Query",
+      "historicalExplanation": "Historical balance queries are coming soon! For now, here are your current balances.",
+      "currentBalances": "Current balances",
+      "viewCurrentBalances": "View current balances",
+      "unknownQueryType": "I'm not sure what balance information you're looking for. Here are your current balances:"
+    }
+  },
+  "conversation": {
+    "history": {
+      "messages": "{count, plural, =0 {No messages} =1 {1 message} other {# messages}}",
+      "empty": "Start a conversation by typing a message below.",
+      "emptyWithGroup": "Ask me anything about this group's expenses and balances."
+    },
+    "input": {
+      "placeholder": "Type your message..."
     }
   }
 }

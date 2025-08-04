@@ -394,5 +394,58 @@
       "TV/Phone/Internet": "TV/Teléfono/Internet",
       "Water": "Agua"
     }
+  },
+  "conversational": {
+    "title": "Asistente IA",
+    "prompts": {
+      "suggestion": "Prueba una de estas:",
+      "createGroup": "Crear un nuevo grupo para nuestro viaje",
+      "addExpense": "Pagué $25 por el almuerzo",
+      "checkBalance": "¿Cuánto le debo a Sarah?",
+      "addExpenseDetailed": "Compré comestibles por $67.50",
+      "splitBill": "Dividir la cena $120 entre 4 personas",
+      "addReceipt": "Extraer gasto de este recibo",
+      "whoOwesWhat": "Mostrarme quién debe qué",
+      "settleUp": "¿Cómo deberíamos liquidar?",
+      "viewDebts": "¿Cuáles son mis deudas pendientes?",
+      "addParticipant": "Agregar a Juan al grupo",
+      "groupSummary": "Dame un resumen de este grupo",
+      "exportData": "Exportar datos del grupo"
+    },
+    "responses": {
+      "processing": "Entiendo que dijiste: \"{message}\". Déjame ayudarte con eso."
+    },
+    "actions": {
+      "createExpense": "Crear este gasto",
+      "viewBalances": "Ver balances",
+      "createGroup": "Crear grupo",
+      "editExpense": "Editar gasto"
+    },
+    "errors": {
+      "title": "Error de Procesamiento",
+      "processingFailed": "No pude procesar tu solicitud. Por favor intenta de nuevo o usa la interfaz tradicional."
+    },
+    "cleared": {
+      "title": "Conversación Borrada",
+      "description": "Tu historial de conversación ha sido borrado."
+    },
+    "help": {
+      "title": "Ayuda del Asistente IA",
+      "description": "Pregúntame cualquier cosa sobre gestión de gastos, balances o grupos. ¡Puedo ayudar a crear gastos, verificar balances y más!"
+    },
+    "input": {
+      "placeholder": "Pregúntame sobre gastos...",
+      "placeholderWithContext": "Pregúntame sobre {context}..."
+    }
+  },
+  "conversation": {
+    "history": {
+      "messages": "{count, plural, =0 {Sin mensajes} =1 {1 mensaje} other {# mensajes}}",
+      "empty": "Comienza una conversación escribiendo un mensaje abajo.",
+      "emptyWithGroup": "Pregúntame cualquier cosa sobre los gastos y balances de este grupo."
+    },
+    "input": {
+      "placeholder": "Escribe tu mensaje..."
+    }
   }
 }

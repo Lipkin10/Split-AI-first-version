@@ -32,7 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { randomId } from '@/lib/api'
+import { RecurrenceRule, randomId } from '@/lib/api'
 import { RuntimeFeatureFlags } from '@/lib/featureFlags'
 import { useActiveUser } from '@/lib/hooks'
 import {
@@ -44,7 +44,6 @@ import { calculateShare } from '@/lib/totals'
 import { cn } from '@/lib/utils'
 import { AppRouterOutput } from '@/trpc/routers/_app'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { RecurrenceRule } from '@prisma/client'
 import { Save } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
@@ -177,7 +176,9 @@ export function ExpenseForm({
     defaultValues: expense
       ? {
           title: expense.title,
-          expenseDate: expense.expenseDate ?? new Date(),
+          expenseDate: expense.expenseDate
+            ? new Date(expense.expenseDate)
+            : new Date(),
           amount: String(expense.amount / 100) as unknown as number, // hack
           category: expense.categoryId,
           paidBy: expense.paidById,

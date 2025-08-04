@@ -7,23 +7,26 @@
 **Database**: **Supabase** (PostgreSQL with real-time capabilities, auth, and APIs) - **Fresh Implementation**  
 **Infrastructure**: Node.js runtime, PWA capabilities  
 **External Dependencies**: OpenAI API (existing), **Supabase SDK**, shadcn/ui components, Tailwind CSS  
-**Internationalization**: next-intl with 15 language support  
+**Internationalization**: next-intl with 15 language support
 
 ## Integration Approach
 
-**Database Integration Strategy**: 
+**Database Integration Strategy**:
+
 - **Supabase-First Architecture**: Leverage real-time subscriptions for conversational interfaces
 - **Auth Integration**: Utilize Supabase Auth for user management
 - **Real-time Capabilities**: Enable live conversation updates and collaborative features
 - **Direct API Access**: Supabase client for efficient data operations
 
-**API Integration Strategy**: 
+**API Integration Strategy**:
+
 - Build conversational layer on existing OpenAI integration patterns
 - **Supabase Integration**: Leverage auth, real-time, and direct database access
 - tRPC endpoints coordinate Supabase operations for complex business logic
 - **Fresh Start Advantage**: No migration complexity, optimized architecture from day one
 
-**Frontend Integration Strategy**: 
+**Frontend Integration Strategy**:
+
 - Conversational interface becomes primary UX with real-time capabilities
 - Existing components serve confirmation workflow
 - Supabase real-time enables live conversation updates
@@ -33,6 +36,7 @@
 ## Code Organization and Standards
 
 **File Structure Approach**:
+
 ```
 src/
   components/
@@ -62,21 +66,25 @@ src/
 
 ## Risk Assessment and Mitigation
 
-**Technical Risks**: 
+**Technical Risks**:
+
 - OpenAI API latency affecting user experience
-- AI interpretation accuracy for complex expense scenarios  
+- AI interpretation accuracy for complex expense scenarios
 - Increased API costs from conversational usage
 
 **Integration Risks**:
+
 - Existing component compatibility with AI-populated data
 - i18n complexity for 15 languages in conversational context
 - Progressive enhancement fallback scenarios
 
 **Deployment Risks**:
+
 - Feature flag needed for gradual rollout
 - Monitoring required for AI interpretation accuracy
 
 **Mitigation Strategies**:
+
 - Implement timeout handling and fallback to manual input
 - Extensive testing of AI-populated forms with existing validation
 - Feature toggles for AI functionality
@@ -86,6 +94,7 @@ src/
 ## API Documentation Integration Strategy
 
 **BMAD External API Documentation Structure**:
+
 ```
 .bmad-core/
   data/
@@ -96,6 +105,7 @@ src/
 ```
 
 **Focused Documentation Scope**:
+
 - **Supabase Patterns**: Auth context, real-time subscriptions, query patterns for AI
 - **OpenAI Integration**: Conversation management, prompt templates, response parsing
 - **Coordination Patterns**: How AI interprets intent and translates to Supabase operations

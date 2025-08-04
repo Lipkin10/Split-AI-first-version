@@ -1,5 +1,5 @@
+import { supabaseAdmin } from '@/lib/supabase'
 import { Parser } from '@json2csv/plainjs'
-import { PrismaClient } from '@prisma/client'
 import contentDisposition from 'content-disposition'
 import { NextResponse } from 'next/server'
 
@@ -18,36 +18,50 @@ function formatDate(isoDateString: Date): string {
   return `${year}-${month}-${day}` // YYYY-MM-DD format
 }
 
-const prisma = new PrismaClient()
-
 export async function GET(
   req: Request,
   { params: { groupId } }: { params: { groupId: string } },
 ) {
-  const group = await prisma.group.findUnique({
-    where: { id: groupId },
-    select: {
-      id: true,
-      name: true,
-      currency: true,
-      expenses: {
-        select: {
-          expenseDate: true,
-          title: true,
-          category: { select: { name: true } },
-          amount: true,
-          paidById: true,
-          paidFor: { select: { participantId: true, shares: true } },
-          isReimbursement: true,
-          splitMode: true,
-        },
-      },
-      participants: { select: { id: true, name: true } },
-    },
-  })
+  // Get group with participants
+  const { data: group } = await supabaseAdmin
+    .from('Group')
+    .select(
+      `
+      id,
+      name,
+      currency,
+      participants:Participant(id, name)
+    `,
+    )
+    .eq('id', groupId)
+    .single()
 
   if (!group) {
     return NextResponse.json({ error: 'Invalid group ID' }, { status: 404 })
+  }
+
+  // Get expenses with related data
+  const { data: expenses } = await supabaseAdmin
+    .from('Expense')
+    .select(
+      `
+      expenseDate,
+      title,
+      category:Category(name),
+      amount,
+      paidById,
+      paidFor:ExpensePaidFor(participantId, shares),
+      isReimbursement,
+      splitMode
+    `,
+    )
+    .eq('groupId', groupId)
+
+  if (!expenses) {
+    return NextResponse.json(
+      { error: 'Failed to fetch expenses' },
+      { status: 500 },
+    )
   }
 
   /*
@@ -91,17 +105,21 @@ export async function GET(
     })),
   ]
 
-  const expenses = group.expenses.map((expense) => ({
+  const processedExpenses = expenses.map((expense) => ({
     date: formatDate(expense.expenseDate),
     title: expense.title,
-    categoryName: expense.category?.name || '',
+    categoryName: Array.isArray(expense.category)
+      ? expense.category[0]?.name || ''
+      : (expense.category as any)?.name || '',
     currency: group.currency,
     amount: (expense.amount / 100).toFixed(2),
     isReimbursement: expense.isReimbursement ? 'Yes' : 'No',
-    splitMode: splitModeLabel[expense.splitMode],
+    splitMode: splitModeLabel[expense.splitMode as keyof typeof splitModeLabel],
     ...Object.fromEntries(
       group.participants.map((participant) => {
-        const { totalShares, participantShare } = expense.paidFor.reduce(
+        const { totalShares, participantShare } = (
+          expense.paidFor || []
+        ).reduce(
           (acc, { participantId, shares }) => {
             acc.totalShares += shares
             if (participantId === participant.id) {
@@ -127,7 +145,7 @@ export async function GET(
   }))
 
   const json2csvParser = new Parser({ fields })
-  const csv = json2csvParser.parse(expenses)
+  const csv = json2csvParser.parse(processedExpenses)
 
   const date = new Date().toISOString().split('T')[0]
   const filename = `Spliit Export - ${group.name} - ${date}.csv`

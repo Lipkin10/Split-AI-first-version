@@ -30,7 +30,7 @@ Spliit is a free and open source alternative to Splitwise. You can either use th
 - [Next.js](https://nextjs.org/) for the web application
 - [TailwindCSS](https://tailwindcss.com/) for the styling
 - [shadcn/UI](https://ui.shadcn.com/) for the UI components
-- [Prisma](https://prisma.io) to access the database
+- [Supabase](https://supabase.com) for database and real-time functionality
 - [Vercel](https://vercel.com/) for hosting (application and database)
 
 ## Contribute
@@ -47,7 +47,7 @@ If you want to contribute financially and help us keep the application free and 
 1. Clone the repository (or fork it if you intend to contribute)
 2. Start a PostgreSQL server. You can run `./scripts/start-local-db.sh` if you don’t have a server already.
 3. Copy the file `.env.example` as `.env`
-4. Run `npm install` to install dependencies. This will also apply database migrations and update Prisma Client.
+4. Run `npm install` to install dependencies.
 5. Run `npm run dev` to start the development server
 
 ## Run in a container

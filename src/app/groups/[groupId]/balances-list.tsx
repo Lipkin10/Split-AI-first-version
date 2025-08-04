@@ -1,6 +1,6 @@
+import { Participant } from '@/lib/api'
 import { Balances } from '@/lib/balances'
 import { cn, formatCurrency } from '@/lib/utils'
-import { Participant } from '@prisma/client'
 import { useLocale } from 'next-intl'
 
 type Props = {
