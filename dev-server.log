@@ -1,0 +1,30 @@
+
+> spliit2@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.28
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 3.9s
+ ○ Compiling / ...
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled / in 42.9s (6986 modules)
+(node:9721) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ GET / 200 in 7883ms
+ ✓ Compiled in 6.2s (2890 modules)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /manifest.webmanifest in 17.6s (4128 modules)
+ ✓ Compiled /groups in 0ms (4133 modules)
+ ✓ Compiled in 10.3s (7038 modules)
+ GET /favicon.ico 200 in 30838ms
+ GET /manifest.webmanifest 200 in 29461ms
+ GET /groups 200 in 14901ms
+ GET /favicon.ico 200 in 90ms
+ GET /manifest.webmanifest 200 in 147ms
+ GET / 200 in 3148ms
+[?25h

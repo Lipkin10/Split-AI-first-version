@@ -4,725 +4,112 @@
 
   ▲ Next.js 14.2.28
   - Local:        http://localhost:3000
+  - Environments: .env.local, .env
 
  ✓ Starting...
- ✓ Ready in 4.6s
+ ✓ Ready in 8.4s
  ○ Compiling / ...
 Browserslist: caniuse-lite is outdated. Please run:
   npx update-browserslist-db@latest
   Why you should do it regularly: https://github.com/browserslist/update-db#readme
- ✓ Compiled / in 28.8s (1316 modules)
-ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_URL"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_API_ANON_KEY"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_SERVICE_ROLE"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_POSTGRES_URL"
-    ],
-    "message": "Required"
-  }
+ ✓ Compiled / in 27.8s (6984 modules)
+Creating Supabase client...
+Available env keys: [
+  'SUPABASE_SERVICE_ROLE',
+  'TERM_PROGRAM',
+  'CLAUDE_CODE_ENTRYPOINT',
+  'NODE',
+  'INIT_CWD',
+  'TERM',
+  'SHELL',
+  'HOMEBREW_REPOSITORY',
+  'TMPDIR',
+  'npm_config_global_prefix',
+  'TERM_PROGRAM_VERSION',
+  'NEXT_PUBLIC_ENABLE_CONVERSATIONAL_EXPENSE',
+  'CURSOR_TRACE_ID',
+  'ORIGINAL_XDG_CURRENT_DESKTOP',
+  'MallocNanoZone',
+  'COLOR',
+  'npm_config_local_prefix',
+  'ENABLE_IDE_INTEGRATION',
+  'GIT_EDITOR',
+  'USER',
+  'COMMAND_MODE',
+  'OPENAI_API_KEY',
+  'npm_config_globalconfig',
+  'NEXT_PUBLIC_SUPABASE_API_ANON_KEY',
+  'CLAUDE_CODE_SSE_PORT',
+  'SSH_AUTH_SOCK',
+  'SUPABASE_POSTGRES_URL',
+  '__CF_USER_TEXT_ENCODING',
+  'npm_execpath',
+  'PATH',
+  'npm_package_json',
+  '_',
+  'npm_config_userconfig',
+  'npm_config_init_module',
+  '__CFBundleIdentifier',
+  'npm_command',
+  'PWD',
+  'npm_lifecycle_event',
+  'EDITOR',
+  'OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE',
+  'npm_package_name',
+  'LANG',
+  'npm_config_npm_version',
+  'XPC_FLAGS',
+  'SUPABASE_URL',
+  'npm_config_node_gyp',
+  'npm_package_version',
+  'XPC_SERVICE_NAME',
+  'NEXT_PUBLIC_SUPABASE_URL',
+  'SHLVL',
+  'HOME',
+  'VSCODE_GIT_ASKPASS_MAIN',
+  'HOMEBREW_PREFIX',
+  'NEXT_PUBLIC_BASE_URL',
+  'npm_config_cache',
+  'LOGNAME',
+  'npm_lifecycle_script',
+  'VSCODE_GIT_IPC_HANDLE',
+  'COREPACK_ENABLE_AUTO_PIN',
+  'npm_config_user_agent',
+  'SUPABASE_API_ANON_KEY',
+  'VSCODE_GIT_ASKPASS_NODE',
+  'GIT_ASKPASS',
+  'HOMEBREW_CELLAR',
+  'INFOPATH',
+  'CLAUDECODE',
+  'npm_node_execpath',
+  'npm_config_prefix',
+  'COLORTERM',
+  'NODE_ENV',
+  'NEXT_RUNTIME',
+  'NEXT_PRIVATE_WORKER',
+  'NODE_OPTIONS',
+  'PORT',
+  '__NEXT_PRIVATE_ORIGIN',
+  'npm_config_noproxy',
+  'VSCODE_GIT_ASKPASS_EXTRA_ARGS',
+  '__NEXT_PROCESSED_ENV',
+  'NEXT_DEPLOYMENT_ID',
+  '__NEXT_OPTIMIZE_FONTS',
+  'RUST_MIN_STACK',
+  'VIPSHOME',
+  '__NEXT_PRIVATE_RUNTIME_TYPE'
 ]
-    at get error (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:699:31)
-    at ZodEffects.parse (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:804:22)
-    at eval (webpack-internal:///(rsc)/./src/lib/env.ts:51:23)
-    at (rsc)/./src/lib/env.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:668:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/app/layout.tsx:16:66)
-    at (rsc)/./src/app/layout.tsx (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:529:1)
-    at Function.__webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at runNextTicks (node:internal/process/task_queues:65:5)
-    at process.processTimers (node:internal/timers:526:9)
-    at async e7 (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:396933)
-    at async tS (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:400486)
-    at async tw (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:401047)
-    at async tO (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:36:2320)
-    at async /Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:36:2989 {
-  digest: '272084574'
-}
- ⨯ ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_URL"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_API_ANON_KEY"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_SERVICE_ROLE"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_POSTGRES_URL"
-    ],
-    "message": "Required"
-  }
+NEXT_PUBLIC_ keys: [
+  'NEXT_PUBLIC_ENABLE_CONVERSATIONAL_EXPENSE',
+  'NEXT_PUBLIC_SUPABASE_API_ANON_KEY',
+  'NEXT_PUBLIC_SUPABASE_URL',
+  'NEXT_PUBLIC_BASE_URL'
 ]
-    at eval (./src/lib/env.ts:51:23)
-    at (rsc)/./src/lib/env.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:668:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (./src/app/layout.tsx:16:66)
-    at (rsc)/./src/app/layout.tsx (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:529:1)
-    at Function.__webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-digest: "2125791518"
- ⨯ ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_URL"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_API_ANON_KEY"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_SERVICE_ROLE"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_POSTGRES_URL"
-    ],
-    "message": "Required"
-  }
-]
-    at eval (./src/lib/env.ts:51:23)
-    at (rsc)/./src/lib/env.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:668:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (./src/app/layout.tsx:16:66)
-    at (rsc)/./src/app/layout.tsx (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:529:1)
-    at Function.__webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-digest: "2125791518"
- ⨯ ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_URL"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_API_ANON_KEY"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_SERVICE_ROLE"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_POSTGRES_URL"
-    ],
-    "message": "Required"
-  }
-]
-    at eval (./src/lib/env.ts:51:23)
-    at (rsc)/./src/lib/env.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:668:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (./src/app/layout.tsx:16:66)
-    at (rsc)/./src/app/layout.tsx (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:529:1)
-    at Function.__webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-digest: "272084574"
- ⨯ ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_URL"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_API_ANON_KEY"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_SERVICE_ROLE"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_POSTGRES_URL"
-    ],
-    "message": "Required"
-  }
-]
-    at get error (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:699:31)
-    at ZodEffects.parse (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:804:22)
-    at eval (webpack-internal:///(rsc)/./src/lib/env.ts:51:23)
-    at (rsc)/./src/lib/env.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:668:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/app/layout.tsx:16:66)
-    at (rsc)/./src/app/layout.tsx (/Users/felipelipkin/Split-AI-first-version/.next/server/app/page.js:529:1)
-    at Function.__webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at runNextTicks (node:internal/process/task_queues:65:5)
-    at process.processTimers (node:internal/timers:526:9)
-    at async e7 (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:396933)
-    at async tS (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:400486)
-    at async tw (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:401047)
-    at async tO (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:36:2320)
-    at async /Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:36:2989 {
-  digest: '272084574',
-  page: '/'
-}
- ○ Compiling /_error ...
- ✓ Compiled /_error in 26.5s (1528 modules)
- GET / 500 in 56155ms
- ○ Compiling /api/trpc/[trpc] ...
- ✓ Compiled /api/trpc/[trpc] in 2.4s (953 modules)
- ⨯ ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_URL"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_API_ANON_KEY"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_SERVICE_ROLE"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_POSTGRES_URL"
-    ],
-    "message": "Required"
-  }
-]
-    at get error (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:699:31)
-    at ZodEffects.parse (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:804:22)
-    at eval (webpack-internal:///(rsc)/./src/lib/env.ts:51:23)
-    at (rsc)/./src/lib/env.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:251:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/lib/supabase.ts:8:62)
-    at (rsc)/./src/lib/supabase.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:273:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/lib/api.ts:19:71)
-    at (rsc)/./src/lib/api.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:229:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/categories/list.procedure.ts:5:66)
-    at (rsc)/./src/trpc/routers/categories/list.procedure.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:328:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/categories/index.ts:6:97)
-    at (rsc)/./src/trpc/routers/categories/index.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:317:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/_app.ts:5:82)
-    at (rsc)/./src/trpc/routers/_app.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:306:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/app/api/trpc/[trpc]/route.ts:7:75)
-    at (rsc)/./src/app/api/trpc/[trpc]/route.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:218:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&page=%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute.ts&appDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!:15:131)
-    at (rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&page=%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute.ts&appDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D! (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:207:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at __webpack_exec__ (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:536:39)
-    at /Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:537:405
-    at __webpack_require__.X (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:163:21)
-    at /Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:537:47
-    at Object.<anonymous> (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:540:3)
-    at Module._compile (node:internal/modules/cjs/loader:1565:14)
-    at Object..js (node:internal/modules/cjs/loader:1708:10)
-    at Module.load (node:internal/modules/cjs/loader:1318:32)
-    at Function._load (node:internal/modules/cjs/loader:1128:12)
-    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
-    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
-    at mod.require (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/require-hook.js:65:28)
-    at require (node:internal/modules/helpers:138:16)
-    at requirePage (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/require.js:109:84)
-    at /Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/load-components.js:103:84
-    at async loadComponentsImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/load-components.js:103:26)
-    at async DevServer.findPageComponentsImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/next-server.js:714:36)
-    at async DevServer.findPageComponents (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
-    at async DevServer.renderPageComponent (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:1910:24)
-    at async DevServer.renderToResponseImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:1962:32)
-    at async DevServer.pipeImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:922:25)
-    at async NextNodeServer.handleCatchallRenderRequest (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/next-server.js:272:17)
-    at async DevServer.handleRequestImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:818:17) {
-  issues: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ],
-  addIssue: [Function (anonymous)],
-  addIssues: [Function (anonymous)],
-  page: '/api/trpc/categories.list',
-  errors: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ]
-}
-(node:20520) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+supabaseUrl: SET
+supabaseAnonKey: SET
+Creating Supabase client with URL: https://smqlrzponrleuwonyapg.supabase.co
+(node:32280) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
- POST /api/trpc/categories.list 500 in 2805ms
- ⨯ ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_URL"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_API_ANON_KEY"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_SERVICE_ROLE"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_POSTGRES_URL"
-    ],
-    "message": "Required"
-  }
-]
-    at get error (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:699:31)
-    at ZodEffects.parse (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:804:22)
-    at eval (webpack-internal:///(rsc)/./src/lib/env.ts:51:23)
-    at (rsc)/./src/lib/env.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:251:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/lib/supabase.ts:8:62)
-    at (rsc)/./src/lib/supabase.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:273:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/lib/api.ts:19:71)
-    at (rsc)/./src/lib/api.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:229:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/categories/list.procedure.ts:5:66)
-    at (rsc)/./src/trpc/routers/categories/list.procedure.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:328:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/categories/index.ts:6:97)
-    at (rsc)/./src/trpc/routers/categories/index.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:317:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/_app.ts:5:82)
-    at (rsc)/./src/trpc/routers/_app.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:306:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/app/api/trpc/[trpc]/route.ts:7:75)
-    at (rsc)/./src/app/api/trpc/[trpc]/route.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:218:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&page=%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute.ts&appDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!:15:131)
-    at (rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&page=%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute.ts&appDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D! (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:207:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at __webpack_exec__ (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:536:39)
-    at /Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:537:405
-    at __webpack_require__.X (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:163:21)
-    at /Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:537:47
-    at Object.<anonymous> (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:540:3)
-    at Module._compile (node:internal/modules/cjs/loader:1565:14)
-    at Object..js (node:internal/modules/cjs/loader:1708:10)
-    at Module.load (node:internal/modules/cjs/loader:1318:32)
-    at Function._load (node:internal/modules/cjs/loader:1128:12)
-    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
-    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
-    at mod.require (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/require-hook.js:65:28)
-    at require (node:internal/modules/helpers:138:16)
-    at requirePage (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/require.js:109:84)
-    at /Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/load-components.js:103:84
-    at async loadComponentsImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/load-components.js:103:26)
-    at async DevServer.findPageComponentsImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/next-server.js:714:36)
-    at async DevServer.findPageComponents (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
-    at async DevServer.renderPageComponent (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:1910:24)
-    at async DevServer.renderToResponseImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:1962:32)
-    at async DevServer.pipeImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:922:25)
-    at async NextNodeServer.handleCatchallRenderRequest (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/next-server.js:272:17)
-    at async DevServer.handleRequestImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:818:17) {
-  issues: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ],
-  addIssue: [Function (anonymous)],
-  addIssues: [Function (anonymous)],
-  page: '/api/trpc/groups.create',
-  errors: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ]
-}
- POST /api/trpc/groups.create 500 in 42ms
- ⨯ ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_URL"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_API_ANON_KEY"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_SERVICE_ROLE"
-    ],
-    "message": "Required"
-  },
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "SUPABASE_POSTGRES_URL"
-    ],
-    "message": "Required"
-  }
-]
-    at get error (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:699:31)
-    at ZodEffects.parse (webpack-internal:///(rsc)/./node_modules/zod/lib/index.mjs:804:22)
-    at eval (webpack-internal:///(rsc)/./src/lib/env.ts:51:23)
-    at (rsc)/./src/lib/env.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:251:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/lib/supabase.ts:8:62)
-    at (rsc)/./src/lib/supabase.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:273:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/lib/api.ts:19:71)
-    at (rsc)/./src/lib/api.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:229:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/categories/list.procedure.ts:5:66)
-    at (rsc)/./src/trpc/routers/categories/list.procedure.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:328:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/categories/index.ts:6:97)
-    at (rsc)/./src/trpc/routers/categories/index.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:317:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/trpc/routers/_app.ts:5:82)
-    at (rsc)/./src/trpc/routers/_app.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:306:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./src/app/api/trpc/[trpc]/route.ts:7:75)
-    at (rsc)/./src/app/api/trpc/[trpc]/route.ts (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:218:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at eval (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&page=%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute.ts&appDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!:15:131)
-    at (rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&page=%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Ftrpc%2F%5Btrpc%5D%2Froute.ts&appDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Ffelipelipkin%2FSplit-AI-first-version&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D! (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:207:1)
-    at __webpack_require__ (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:33:43)
-    at __webpack_exec__ (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:536:39)
-    at /Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:537:405
-    at __webpack_require__.X (/Users/felipelipkin/Split-AI-first-version/.next/server/webpack-runtime.js:163:21)
-    at /Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:537:47
-    at Object.<anonymous> (/Users/felipelipkin/Split-AI-first-version/.next/server/app/api/trpc/[trpc]/route.js:540:3)
-    at Module._compile (node:internal/modules/cjs/loader:1565:14)
-    at Object..js (node:internal/modules/cjs/loader:1708:10)
-    at Module.load (node:internal/modules/cjs/loader:1318:32)
-    at Function._load (node:internal/modules/cjs/loader:1128:12)
-    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
-    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
-    at mod.require (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/require-hook.js:65:28)
-    at require (node:internal/modules/helpers:138:16)
-    at requirePage (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/require.js:109:84)
-    at /Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/load-components.js:103:84
-    at async loadComponentsImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/load-components.js:103:26)
-    at async DevServer.findPageComponentsImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/next-server.js:714:36)
-    at async DevServer.findPageComponents (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
-    at async DevServer.renderPageComponent (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:1910:24)
-    at async DevServer.renderToResponseImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:1962:32)
-    at async DevServer.pipeImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:922:25)
-    at async NextNodeServer.handleCatchallRenderRequest (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/next-server.js:272:17)
-    at async DevServer.handleRequestImpl (/Users/felipelipkin/Split-AI-first-version/node_modules/next/dist/server/base-server.js:818:17) {
-  issues: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ],
-  addIssue: [Function (anonymous)],
-  addIssues: [Function (anonymous)],
-  page: '/api/trpc/categories.list',
-  errors: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    },
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ]
-}
- POST /api/trpc/categories.list 500 in 27ms
-   Reload env: .env
- ✓ Compiled in 2.7s (794 modules)
+ GET / 200 in 30304ms
+ ✓ Compiled in 3.2s (2889 modules)
+[?25h

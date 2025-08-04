@@ -33,6 +33,13 @@ const nextConfig = {
       allowedOrigins: ['localhost:3000'],
     },
   },
+  // Explicitly define environment variables for client-side access
+  env: {
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    NEXT_PUBLIC_ENABLE_CONVERSATIONAL_EXPENSE: process.env.NEXT_PUBLIC_ENABLE_CONVERSATIONAL_EXPENSE,
+  },
 }
 
 export default withNextIntl(nextConfig)

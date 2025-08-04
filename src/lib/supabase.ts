@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import { env } from './env'
 
 // Database types aligned with current codebase structure
 export interface Database {
@@ -205,23 +204,47 @@ export interface Database {
   }
 }
 
-// Client for browser usage (with anon key)
-export const supabase = createClient<Database>(
-  env.SUPABASE_URL,
-  env.SUPABASE_API_ANON_KEY,
-)
+// Build-time environment variable injection with fallbacks
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'https://smqlrzponrleuwonyapg.supabase.co'
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtcWxyenBvbnJsZXV3b255YXBnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMjg5NzgsImV4cCI6MjA2ODkwNDk3OH0.BdMCdL3ypPQg8kmXIBd7LzYh5mhLsfLrOxaadqhWGsU'
 
-// Admin client for server usage (with service role)
-export const supabaseAdmin = createClient<Database>(
-  env.SUPABASE_URL,
-  env.SUPABASE_SERVICE_ROLE,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
+
+// Admin client for server usage (with service role) - only create server-side
+function createAdminClient() {
+  if (typeof window !== 'undefined') {
+    // On client-side, return a dummy client that throws helpful errors
+    return new Proxy({} as ReturnType<typeof createClient<Database>>, {
+      get() {
+        throw new Error('supabaseAdmin should only be used server-side')
+      }
+    })
+  }
+
+  const supabaseServerUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseServiceRole = process.env.SUPABASE_SERVICE_ROLE
+
+  if (!supabaseServerUrl) {
+    throw new Error('Missing SUPABASE_URL or NEXT_PUBLIC_SUPABASE_URL environment variable')
+  }
+
+  if (!supabaseServiceRole) {
+    throw new Error('Missing SUPABASE_SERVICE_ROLE environment variable for admin client')
+  }
+
+  return createClient<Database>(
+    supabaseServerUrl,
+    supabaseServiceRole,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
     },
-  },
-)
+  )
+}
+
+export const supabaseAdmin = createAdminClient()
 
 // Export types for use in the app
 export type Tables<T extends keyof Database['public']['Tables']> =
