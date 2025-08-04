@@ -34,6 +34,11 @@ export async function getUserLocale() {
     locale = getAcceptLanguageLocale(headers(), locales)
   }
 
+  // Ensure we always return a valid locale
+  if (!locale || !locales.includes(locale as Locale)) {
+    locale = defaultLocale
+  }
+
   return locale
 }
 

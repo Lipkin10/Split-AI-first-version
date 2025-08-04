@@ -10,7 +10,7 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
 import { useToast } from '@/components/ui/use-toast'
-import type { ConversationMessage, BalanceQueryIntent } from '@/lib/ai-conversation/types'
+import type { ConversationMessage, BalanceQueryIntent, GroupManagementIntent } from '@/lib/ai-conversation/types'
 import { ConversationalPatternHandler } from '@/lib/ai-conversation/conversational-patterns'
 import { getBalances, getSuggestedReimbursements } from '@/lib/balances'
 import { RuntimeFeatureFlags } from '@/lib/featureFlags'
@@ -24,6 +24,7 @@ import { ConversationHistory } from './conversation-history'
 import { ConversationInput } from './conversation-input'
 import { ConversationalExpenseForm } from './conversational-expense-form'
 import { ConversationalBalanceResponse } from './conversational-balance-response'
+import { ConversationalGroupResponse } from './conversational-group-response'
 
 interface ConversationalInterfaceProps {
   className?: string
@@ -34,6 +35,7 @@ interface ConversationalInterfaceProps {
   error: string | null
   isMinimized?: boolean
   group?: NonNullable<AppRouterOutput['groups']['get']['group']>
+  groups?: AppRouterOutput['groups']['list']['groups']
   categories?: AppRouterOutput['categories']['list']['categories']
   runtimeFeatureFlags?: RuntimeFeatureFlags
   language?: string
@@ -52,6 +54,7 @@ export function ConversationalInterface({
   error,
   isMinimized = true,
   group,
+  groups = [],
   categories,
   runtimeFeatureFlags,
   language = 'en-US',
@@ -74,6 +77,11 @@ export function ConversationalInterface({
     query: BalanceQueryIntent | null
     message: string
   }>({ active: false, query: null, message: '' })
+  const [groupManagementMode, setGroupManagementMode] = useState<{
+    active: boolean
+    intent: GroupManagementIntent | null
+    message: string
+  }>({ active: false, intent: null, message: '' })
   const inputRef = useRef<HTMLInputElement>(null)
 
   // Sync isExpanded with isMinimized prop
@@ -167,6 +175,31 @@ export function ConversationalInterface({
     setBalanceQueryMode({ active: false, query: null, message: '' })
   }, [])
 
+  // Handle group management workflow
+  const handleGroupManagement = useCallback(
+    (intent: GroupManagementIntent, message: string) => {
+      setGroupManagementMode({
+        active: true,
+        intent,
+        message: message.trim(),
+      })
+      setIsExpanded(true)
+    },
+    [],
+  )
+
+  const handleGroupManagementComplete = useCallback(() => {
+    setGroupManagementMode({ active: false, intent: null, message: '' })
+    toast({
+      title: t('success.groupManagementComplete'),
+      description: t('success.groupManagementCompleteDescription'),
+    })
+  }, [toast, t])
+
+  const handleCancelGroupManagement = useCallback(() => {
+    setGroupManagementMode({ active: false, intent: null, message: '' })
+  }, [])
+
   // Forward declaration for handleSendMessage
   const handleSendMessageRef = useRef<(message: string) => Promise<void>>()
 
@@ -219,6 +252,10 @@ export function ConversationalInterface({
         t('prompts.addParticipant'),
         t('prompts.groupSummary'),
         t('prompts.exportData'),
+        'Add John to the group',
+        'Switch to vacation group',
+        'Show me all my groups',
+        'Create a new group for our trip',
       ],
     }
 
@@ -300,6 +337,17 @@ export function ConversationalInterface({
           setInputValue('')
           return
         }
+
+        // If this is a group management intent, handle it
+        if (
+          intentResult.intent === 'group_management' &&
+          intentResult.confidence > 0.6
+        ) {
+          const groupIntent = intentResult.extractedData as GroupManagementIntent
+          handleGroupManagement(groupIntent, message)
+          setInputValue('')
+          return
+        }
       }
 
       // Otherwise, use regular conversation flow
@@ -313,7 +361,7 @@ export function ConversationalInterface({
         variant: 'destructive',
       })
     }
-  }, [patternHandler, groupId, group, parseMessageIntent, categories, runtimeFeatureFlags, language, toast, t, onSendMessage, handleBalanceQuery, handleExpenseCreation, isLoading])
+  }, [patternHandler, groupId, group, parseMessageIntent, categories, runtimeFeatureFlags, language, toast, t, onSendMessage, handleBalanceQuery, handleExpenseCreation, handleGroupManagement, isLoading])
 
   // Set the ref for handleSendMessage
   useEffect(() => {
@@ -460,6 +508,19 @@ export function ConversationalInterface({
                   })()}
                 </div>
               </div>
+            ) : groupManagementMode.active &&
+              groupManagementMode.intent ? (
+              /* Group Management Mode */
+              <div className="h-80 overflow-y-auto">
+                <ConversationalGroupResponse
+                  intent={groupManagementMode.intent}
+                  message={groupManagementMode.message}
+                  groups={groups}
+                  currentGroup={group}
+                  onComplete={handleGroupManagementComplete}
+                  onCancel={handleCancelGroupManagement}
+                />
+              </div>
             ) : (
               <>
                 {/* Context-aware prompts */}
@@ -518,9 +579,11 @@ export function ConversationalInterface({
                 })
               : balanceQueryMode.active
               ? 'Ask a follow-up question or close to continue...'
+              : groupManagementMode.active
+              ? 'Managing group...'
               : t('input.placeholder', { context: currentPage })
           }
-          disabled={expenseCreationMode.active}
+          disabled={expenseCreationMode.active || groupManagementMode.active}
         />
       </CardContent>
     </Card>

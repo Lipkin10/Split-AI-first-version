@@ -39,9 +39,9 @@ jest.mock('../../app/groups/[groupId]/reimbursement-list', () => ({
 
 describe('Conversational Balance Response - UX Validation', () => {
   const mockParticipants: Participant[] = [
-    { id: 'user1', name: 'John' },
-    { id: 'user2', name: 'Alice' },
-    { id: 'user3', name: 'Bob' },
+    { id: 'user1', name: 'John', groupId: 'test-group' },
+    { id: 'user2', name: 'Alice', groupId: 'test-group' },
+    { id: 'user3', name: 'Bob', groupId: 'test-group' },
   ]
 
   const mockBalances: Balances = {

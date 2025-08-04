@@ -343,38 +343,66 @@ export async function classifyGroupManagementIntent(
   language: string = 'en-US',
   groupContext?: { participants: { name: string }[]; currency: string },
 ): Promise<ConversationParseResult> {
-  const groupPrompt = `You are specialized in detecting group management requests.
+  // Import group management patterns for faster, more accurate classification
+  const { parseGroupManagementIntent } = await import('./ai-conversation/group-management-patterns')
+  
+  // First try pattern matching for faster, more accurate classification
+  const patternMatch = parseGroupManagementIntent(message)
+  
+  if (patternMatch && patternMatch.confidence > 0.7) {
+    // High confidence pattern match - return immediately
+    return {
+      intent: 'group_management',
+      confidence: patternMatch.confidence,
+      extractedData: patternMatch,
+    }
+  }
+  
+  // Fallback to AI classification for complex or ambiguous queries
+  const groupPrompt = `You are specialized in detecting group management requests with enhanced pattern recognition.
 
 GROUP MANAGEMENT INDICATORS:
-- "create group", "new group", "start group"
-- "add [person]", "invite", "remove [person]"
-- "update group", "change group name"
-- "delete group", "archive group"
+- Group Creation: "create group", "new group", "start group", "make group"
+- Participant Management: "add [person]", "invite", "remove [person]", "kick"
+- Group Navigation: "switch to [group]", "go to [group]", "open [group]"
+- Group Updates: "change currency", "update group", "modify group"
+- Group Listing: "show groups", "list groups", "my groups"
 
-EXTRACT:
-- action: "create" | "update" | "delete" | "invite"
-- groupName: Group name if mentioned
-- participants: People to add/remove
+ENHANCED EXTRACTION:
+- action: "create_group" | "add_participant" | "remove_participant" | "update_group" | "switch_group" | "list_groups"  
+- groupName: Extract group name, clean prefixes like "the", "our", "my"
+- participants: Extract participant names, split by separators (comma, "and", etc.)
+- currency: Extract currency mentions (USD, EUR, dollars, euros, etc.)
+- confidence: Adjust based on clarity and pattern matching
 
 If this is clearly group management, respond with JSON:
 {
   "intent": "group_management",
-  "confidence": 0.8-1.0,
+  "confidence": 0.7-1.0,
   "extractedData": {
-    "action": "action_type",
-    "groupName": "name" or null,
-    "participants": ["name1", "name2"] or []
+    "action": "create_group",
+    "groupName": "clean_name",
+    "participants": ["name1", "name2"],
+    "currency": "USD",
+    "confidence": 0.85
   }
 }
 
 If not group management, return confidence < 0.3.`
 
-  return await parseWithSpecificPrompt(
+  const result = await parseWithSpecificPrompt(
     message,
     groupPrompt,
     language,
     groupContext,
   )
+  
+  // If AI classification has higher confidence than pattern matching, use it
+  return result.confidence > (patternMatch?.confidence || 0) ? result : {
+    intent: 'group_management',
+    confidence: patternMatch?.confidence || 0,
+    extractedData: patternMatch,
+  }
 }
 
 export async function classifyExpenseHistoryIntent(

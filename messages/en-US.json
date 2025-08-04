@@ -452,7 +452,61 @@
     },
     "success": {
       "expenseCreated": "Expense Created",
-      "expenseCreatedDescription": "Your expense has been successfully created!"
+      "expenseCreatedDescription": "Your expense has been successfully created!",
+      "groupManagementComplete": "Group Operation Complete",
+      "groupManagementCompleteDescription": "Your group operation has been completed successfully!"
+    },
+    "group": {
+      "actions": {
+        "createGroup": "Create Group",
+        "addParticipant": "Add Participant",
+        "removeParticipant": "Remove Participant",
+        "updateGroup": "Update Group",
+        "switchGroup": "Switch Group",
+        "listGroups": "List Groups",
+        "unknown": "Group Action"
+      },
+      "confirmation": {
+        "createGroup": "Create group \"{name}\"{participants, select, other { with {participants}}}?",
+        "addParticipant": "Add {participants} to {group}?",
+        "removeParticipant": "Remove {participants} from {group}?",
+        "updateGroup": "Update {changes}?",
+        "switchGroup": "Switch to group \"{group}\"?",
+        "default": "Proceed with this group operation?"
+      },
+      "success": {
+        "groupCreated": "Group Created",
+        "groupCreatedDescription": "Successfully created group \"{name}\"",
+        "participantsUpdated": "Participants Updated",
+        "participantsAdded": "Added {participants} to the group",
+        "participantsRemoved": "Removed {participants} from the group",
+        "groupUpdated": "Group Updated",
+        "currencyUpdated": "Currency updated to {currency}",
+        "settingsUpdated": "Group settings updated",
+        "groupSwitched": "Group Switched",
+        "groupSwitchedDescription": "Switched to group \"{name}\""
+      },
+      "errors": {
+        "createFailed": "Failed to Create Group",
+        "updateFailed": "Failed to Update Group",
+        "switchFailed": "Failed to Switch Group",
+        "groupNotFound": "Group Not Found",
+        "groupNotFoundDescription": "Could not find group \"{name}\". Available groups: {available}"
+      },
+      "extracted": {
+        "title": "Extracted Information",
+        "message": "From: \"{message}\"",
+        "group": "Group:",
+        "participants": "Participants:",
+        "currency": "Currency:"
+      },
+      "noGroups": "You don't have any groups yet. Create one by saying \"Create a new group for [event name]\".",
+      "cancel": "Cancel",
+      "continue": "Continue",
+      "back": "Back",
+      "confirm": "Confirm",
+      "processing": "Processing...",
+      "done": "Done"
     },
     "cleared": {
       "title": "Conversation Cleared",

@@ -422,8 +422,66 @@
       "editExpense": "Modifier la dépense"
     },
     "errors": {
-      "title": "Erreur de Traitement",
+      "title": "Erreur de Traitement", 
       "processingFailed": "Je n'ai pas pu traiter votre demande. Veuillez réessayer ou utiliser l'interface traditionnelle."
+    },
+    "success": {
+      "expenseCreated": "Dépense Créée",
+      "expenseCreatedDescription": "Votre dépense a été créée avec succès !",
+      "groupManagementComplete": "Opération de Groupe Terminée",
+      "groupManagementCompleteDescription": "Votre opération de groupe a été terminée avec succès !"
+    },
+    "group": {
+      "actions": {
+        "createGroup": "Créer un Groupe",
+        "addParticipant": "Ajouter un Participant",
+        "removeParticipant": "Supprimer un Participant",
+        "updateGroup": "Mettre à Jour le Groupe",
+        "switchGroup": "Changer de Groupe",
+        "listGroups": "Lister les Groupes",
+        "unknown": "Action de Groupe"
+      },
+      "confirmation": {
+        "createGroup": "Créer le groupe \"{name}\"{participants, select, other { avec {participants}}} ?",
+        "addParticipant": "Ajouter {participants} à {group} ?",
+        "removeParticipant": "Supprimer {participants} de {group} ?",
+        "updateGroup": "Mettre à jour {changes} ?",
+        "switchGroup": "Passer au groupe \"{group}\" ?",
+        "default": "Procéder à cette opération de groupe ?"
+      },
+      "success": {
+        "groupCreated": "Groupe Créé",
+        "groupCreatedDescription": "Groupe \"{name}\" créé avec succès",
+        "participantsUpdated": "Participants Mis à Jour",
+        "participantsAdded": "{participants} ajouté(s) au groupe",
+        "participantsRemoved": "{participants} supprimé(s) du groupe",
+        "groupUpdated": "Groupe Mis à Jour",
+        "currencyUpdated": "Devise mise à jour vers {currency}",
+        "settingsUpdated": "Paramètres du groupe mis à jour",
+        "groupSwitched": "Groupe Changé",
+        "groupSwitchedDescription": "Basculé vers le groupe \"{name}\""
+      },
+      "errors": {
+        "createFailed": "Échec de la Création du Groupe",
+        "updateFailed": "Échec de la Mise à Jour du Groupe",
+        "switchFailed": "Échec du Changement de Groupe",
+        "groupNotFound": "Groupe Non Trouvé",
+        "groupNotFoundDescription": "Impossible de trouver le groupe \"{name}\". Groupes disponibles : {available}"
+      },
+      "extracted": {
+        "title": "Informations Extraites",
+        "message": "De : \"{message}\"",
+        "group": "Groupe :",
+        "participants": "Participants :",
+        "currency": "Devise :"
+      },
+      "noGroups": "Vous n'avez pas encore de groupes. Créez-en un en disant \"Créer un nouveau groupe pour [nom de l'événement]\".",
+      "cancel": "Annuler",
+      "continue": "Continuer",
+      "back": "Retour",
+      "confirm": "Confirmer",
+      "processing": "Traitement...",
+      "done": "Terminé"
     },
     "cleared": {
       "title": "Conversation Effacée",

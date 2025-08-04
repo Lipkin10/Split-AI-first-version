@@ -11,8 +11,8 @@ jest.mock('next/navigation', () => ({
   usePathname: () => '/groups/test-group/balances',
 }))
 
-jest.mock('@/lib/utils', () => ({
-  getCurrentPageFromPath: (path: string) => path.includes('balances') ? 'balances' : 'expenses',
+jest.mock('../../lib/utils', () => ({
+  getCurrentPageFromPath: jest.fn((path: string) => path.includes('balances') ? 'balances' : 'expenses'),
 }))
 
 // Mock sessionStorage

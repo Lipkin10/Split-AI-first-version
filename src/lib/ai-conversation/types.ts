@@ -27,9 +27,16 @@ export interface BalanceQueryIntent {
 }
 
 export interface GroupManagementIntent {
-  action: 'create' | 'update' | 'delete' | 'invite'
+  action: 'create_group' | 'add_participant' | 'remove_participant' | 'update_group' | 'switch_group' | 'list_groups'
   groupName?: string
   participants?: string[]
+  currency?: string
+  groupId?: string
+  settings?: {
+    information?: string
+    currency?: string
+  }
+  confidence: number
 }
 
 export interface ExpenseHistoryIntent {
